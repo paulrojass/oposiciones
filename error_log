@@ -1,0 +1,10 @@
+[11-Mar-2020 16:50:34 UTC] PHP Notice:  Undefined index: argv in /home/dmestudio/oposiciones/vendor/symfony/console/Input/ArgvInput.php on line 49
+[11-Mar-2020 16:50:35 UTC] PHP Warning:  array_shift() expects parameter 1 to be array, null given in /home/dmestudio/oposiciones/vendor/symfony/console/Input/ArgvInput.php on line 53
+[11-Mar-2020 16:52:16 UTC] PHP Notice:  Undefined index: argv in /home/dmestudio/oposiciones/vendor/symfony/console/Input/ArgvInput.php on line 49
+[11-Mar-2020 16:52:16 UTC] PHP Warning:  array_shift() expects parameter 1 to be array, null given in /home/dmestudio/oposiciones/vendor/symfony/console/Input/ArgvInput.php on line 53
+[11-Mar-2020 16:52:47 UTC] PHP Notice:  Undefined index: argv in /home/dmestudio/oposiciones/vendor/symfony/console/Input/ArgvInput.php on line 49
+[11-Mar-2020 16:52:47 UTC] PHP Warning:  array_shift() expects parameter 1 to be array, null given in /home/dmestudio/oposiciones/vendor/symfony/console/Input/ArgvInput.php on line 53
+[11-Mar-2020 16:53:32 UTC] PHP Notice:  Undefined index: argv in /home/dmestudio/oposiciones/vendor/symfony/console/Input/ArgvInput.php on line 49
+[11-Mar-2020 16:53:32 UTC] PHP Warning:  array_shift() expects parameter 1 to be array, null given in /home/dmestudio/oposiciones/vendor/symfony/console/Input/ArgvInput.php on line 53
+[11-Mar-2020 17:07:37 UTC] PHP Notice:  Undefined index: argv in /home/dmestudio/oposiciones/vendor/symfony/console/Input/ArgvInput.php on line 49
+[11-Mar-2020 17:07:37 UTC] PHP Warning:  array_shift() expects parameter 1 to be array, null given in /home/dmestudio/oposiciones/vendor/symfony/console/Input/ArgvInput.php on line 53

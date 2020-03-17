@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Tag;
 use Illuminate\Http\Request;
 
-use App\Category;
+use App\Subcategory;
+
+use Illuminate\Support\Facades\Validator;
 
 class TagController extends Controller
 {
@@ -32,11 +34,12 @@ class TagController extends Controller
      */
     public function create(Request $request)
     {
+        $this->validator($request->all())->validate();
         $tag = new Tag();
         $tag->name = $request->name;
-        $tag->category_id = $request->category_id;
+        $tag->subcategory_id = $request->subcategory_id;
         $tag->save();
-        return redirect('categoria/'.$request->category_id.'/etiquetas');
+        return redirect('subcategoria/'.$request->subcategory_id.'/etiquetas');
 
     }
 
@@ -82,7 +85,9 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $tag->name = $request->name;
+        $tag->save();
+        return $tag; 
     }
 
     /**
@@ -98,17 +103,36 @@ class TagController extends Controller
 
     public function view($id)
     {
-        $category = Category::find($id);
+        $subcategory = Subcategory::find($id);
 
-        $tags = Tag::where('category_id', $id)->orderBy('created_at', 'desc')->paginate(6);
-        return view('tags', compact('category','tags'));
+        $tags = Tag::where('subcategory_id', $id)->orderBy('created_at', 'desc')->paginate(6);
+        return view('tags', compact('subcategory','tags'));
     }
 
     public function delete($id)
     {
         $tag = Tag::find($id);
-        $category_id = $tag->category->id;
+        $subcategory_id = $tag->subcategory->id;
         $this->destroy($tag);
-        return redirect('categoria/'.$category_id.'/etiquetas');
+        return redirect('subcategoria/'.$subcategory_id.'/etiquetas');
+    }
+
+    public function updateTag(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        
+        $tag = Tag::find($request->id);
+
+        $this->update($request, $tag);
+
+        return $this->view($tag->subcategory->id);
+    }
+
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'unique:tags']
+        ]);
     }
 }

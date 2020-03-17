@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Subcategory;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
 
-class CategoryController extends Controller
+class SubcategoryController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-    }    
+    }
     /**
      * Display a listing of the resource.
      *
@@ -31,10 +32,11 @@ class CategoryController extends Controller
     public function create(Request $request)
     {
         $this->validator($request->all())->validate();
-        $categoria = new Category();
-        $categoria->name = $request->name;
-        $categoria->save();
-        return redirect('categorias');
+        $subcategoria = new Subcategory();
+        $subcategoria->name = $request->name;
+        $subcategoria->category_id = $request->category_id;
+        $subcategoria->save();
+        return redirect('categoria/'.$request->category_id.'/subcategorias');
     }
 
     /**
@@ -51,10 +53,10 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Subcategory  $subcategory
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Subcategory $subcategory)
     {
         //
     }
@@ -62,10 +64,10 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Subcategory  $subcategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Subcategory $subcategory)
     {
         //
     }
@@ -74,56 +76,61 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
+     * @param  \App\Subcategory  $subcategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Subcategory $subcategory)
     {
-        $category->name = $request->name;
-        $category->save();
-        return $category; 
+        $subcategory->name = $request->name;
+        $subcategory->save();
+        return $subcategory; 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Subcategory  $subcategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Subcategory $subcategory)
     {
-        return $category->delete();
+        return $subcategory->delete();
     }
 
-    public function view()
+    public function view($id)
     {
-        $categories = Category::orderBy('created_at', 'desc')->paginate(6);
-        return view('categories', compact('categories'));
+        $category = Category::find($id);
+
+        $subcategories = Subcategory::where('category_id', $id)->orderBy('created_at', 'desc')->paginate(6);
+        return view('subcategories', compact('category','subcategories'));
     }
 
     public function delete($id)
     {
-        $category = Category::find($id);
-        $this->destroy($category);
-        return redirect('categorias');
+        $subcategory = Subcategory::find($id);
+        $this->destroy($subcategory);
+        return redirect('categoria/'.$subcategory->category_id.'/subcategorias');
+
     }
 
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'unique:categories']
+            'name' => ['required', 'unique:subcategories']
         ]);
     }
 
 
-    public function updateCategory(Request $request)
+    public function updateSubcategory(Request $request)
     {
         $this->validator($request->all())->validate();
         
-        $category = Category::find($request->id);
+        $subcategory = Subcategory::find($request->id);
 
-        $this->update($request, $category);
+        $this->update($request, $subcategory);
 
-        return $this->view();
+        return $this->view($subcategory->category->id);
     }
+
+
 }

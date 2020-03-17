@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Question;
 
+use Illuminate\Support\Facades\Validator;
+
 class AnswerController extends Controller
 {
     public function __construct()
@@ -85,7 +87,9 @@ class AnswerController extends Controller
      */
     public function update(Request $request, Answer $answer)
     {
-        //
+        $answer->content = $request->content;
+        $answer->save();
+        return $answer; 
     }
 
     /**
@@ -108,11 +112,19 @@ class AnswerController extends Controller
         return view('answers', compact('question','answers'));
     }
 
+    public function updateAnswer(Request $request)
+    {    
+        $answer = Answer::find($request->id);
+
+        $this->update($request, $answer);
+
+        return $this->view($answer->question->id);
+    }
+
     public function delete($id)
     {
         $answer = Answer::find($id); 
         $this->destroy($answer);
         return redirect('pregunta/'.$answer->question_id.'/respuestas');
     }
-
 }

@@ -15,11 +15,11 @@ class CreateTagsTable extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 200);
-            $table->unsignedBigInteger('category_id');
+            $table->string('name', 200)->unique();
+            $table->unsignedBigInteger('subcategory_id');
             $table->timestamps();
 
-            $table->foreign('category_id')->references('id')->on('categories')
+            $table->foreign('subcategory_id')->references('id')->on('subcategories')
             ->onDelete('cascade');
         });
     }

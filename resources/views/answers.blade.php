@@ -22,7 +22,12 @@
                         <div class="form-row align-items-center">
                             <div class="col-auto">
                                 <label for="content" class="sr-only">Respuesta</label>
-                                <input type="text" maxlength="200" class="form-control" name="content" id="content" placeholder="respuesta" required autofocus>
+                                <input type="text" maxlength="200" class="form-control @error('content') is-invalid @enderror" name="content" id="content" placeholder="respuesta" required autofocus>
+                                @error('content')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             @php($correcta = 0)
                             @foreach ($answers as $answer)
@@ -55,19 +60,20 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($answers as $anwser)
+                        @foreach ($answers as $answer)
                         <tr>
-                            <th scope="row">{{ $anwser->id }}</th>
-                            <td class="col-8">{{ $anwser->content }}</td>
+                            <th scope="row">{{ $answer->id }}</th>
+                            <td class="col-8">{{ $answer->content }}</td>
                             <td class="col-8">
-                            @if ($anwser->correct)
+                            @if ($answer->correct)
                                 Sí
                             @else
                                 No
                             @endif
                             </td>
                             <td>
-                                <a href="{{ route('eliminar-respuesta', $anwser->id) }}"  onclick="return confirm('¿Desea eleminar la respuesta?')">eliminar
+                                <a href="javascript:void(0)" data-toggle="modal" data-target="#exampleModal" data-content="{{ $answer->content }}" data-id="{{ $answer->id }}" >editar</a> |
+                                <a href="{{ route('eliminar-respuesta', $answer->id) }}"  onclick="return confirm('¿Desea eleminar la respuesta?')">eliminar
                                 </a>
                             </td>
                         </tr>
@@ -80,8 +86,52 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar respuesta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="{{ route('actualizar-respuesta') }}">
+                <div class="modal-body">
+                    @csrf
+                    <input type="hidden" id="id" name="id">
+                    <div class="form-group">
+                        <input type="text" maxlength="200" class="form-control @error('content') is-invalid @enderror" name="content" id="content" placeholder="respuesta" required autofocus>
+                        @error('content')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">cancelar</button>
+                    <button type="submit" class="btn btn-primary">actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('scripts')
+<script>
+    window.onload = function() {
+        $('#content').focus();
 
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var a = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = a.data('id') // Extract info from data-* attributes
+            var content = a.data('content') // Extract info from data-* attributes
+            var modal = $(this)
+            modal.find('#content').val(content)
+            modal.find('#id').val(recipient)
+        })  
+    };
+</script>
 @endsection

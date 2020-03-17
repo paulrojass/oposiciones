@@ -18,23 +18,34 @@ Route::get('/', function () {
 });
 
 
-Auth::routes();
+Auth::routes(['register' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('categorias', 'CategoryController@view')->name('categorias');
 Route::post('agregar-categoria', 'CategoryController@create')->name('agregar-categoria');
 Route::get('eliminar-categoria/{id}', 'CategoryController@delete')->name('eliminar-categoria');
+Route::post('actualizar-categoria', 'CategoryController@updateCategory')->name('actualizar-categoria');
 
-Route::get('categoria/{id}/etiquetas', 'TagController@view')->name('etiquetas');
+Route::get('categoria/{id}/subcategorias', 'SubcategoryController@view')->name('subcategorias');
+Route::post('agregar-subcategoria', 'SubcategoryController@create')->name('agregar-subcategoria');
+Route::get('eliminar-subcategoria/{id}', 'SubcategoryController@delete')->name('eliminar-subcategoria');
+Route::post('actualizar-subcategoria', 'SubcategoryController@updateSubcategory')->name('actualizar-subcategoria');
+
+Route::get('subcategoria/{id}/etiquetas', 'TagController@view')->name('etiquetas');
 Route::post('agregar-etiqueta', 'TagController@create')->name('agregar-etiqueta');
 Route::get('eliminar-etiqueta/{id}', 'TagController@delete')->name('eliminar-etiqueta');
-
+Route::post('actualizar-etiqueta', 'TagController@updateTag')->name('actualizar-etiqueta');
 
 Route::get('preguntas', 'QuestionController@view')->name('preguntas');
 Route::post('agregar-pregunta', 'QuestionController@create')->name('agregar-pregunta');
 Route::get('eliminar-pregunta/{id}', 'QuestionController@delete')->name('eliminar-pregunta');
+Route::post('actualizar-pregunta', 'QuestionController@updateQuestion')->name('actualizar-pregunta');
 
 Route::get('pregunta/{id}/respuestas', 'AnswerController@view')->name('respuestas');
 Route::post('agregar-respuesta', 'AnswerController@create')->name('agregar-respuesta');
 Route::get('eliminar-respuesta/{id}', 'AnswerController@delete')->name('eliminar-respuesta');
+Route::post('actualizar-respuesta', 'AnswerController@updateAnswer')->name('actualizar-respuesta');
+
+Route::get('pregunta/{id}/etiquetas', 'QuestionController@tags')->name('preguntas-etiquetas');
+Route::post('agregar-etiqueta-pregunta', 'QuestionController@createTag')->name('agregar-etiqueta-pregunta');

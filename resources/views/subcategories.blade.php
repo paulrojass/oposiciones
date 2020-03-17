@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Categorias')
+@section('title', 'Subcategorias')
 
 @section('css')
 
@@ -11,15 +11,18 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Nueva Categoría</div>
+                <div class="card-header">Nueva subcategoría para la categoría <strong>{{ $category->name }}</strong>
+                    <a class="float-right" href="{{ route('categorias') }}">volver a Categorias</a>
+                </div>
 
                 <div class="card-body">
-                    <form class="form-inline" method="POST" action="{{ route('agregar-categoria') }}">
+                    <form class="form-inline" method="POST" action="{{ route('agregar-subcategoria') }}">
                         @csrf
+                        <input type="hidden" name="category_id" id="category_id" value="{{ $category->id }}">
                         <div class="form-row align-items-center">
                             <div class="col-auto">
-                                <label for="name" class="sr-only">Nombre de Categoría</label>
-                                <input type="text" maxlength="200" class="form-control @error('name') is-invalid @enderror"   name="name" id="name" placeholder="Nombre de la categoria" required autofocus>
+                                <label for="name" class="sr-only">Nombre de Subcategoría</label>
+                                <input type="text" maxlength="200" class="form-control @error('name') is-invalid @enderror"   name="name" id="name" placeholder="Nombre de la subcategoria" required autofocus>
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -38,31 +41,31 @@
           <thead>
             <tr>
               <th scope="col">id</th>
-              <th scope="col">Categorias</th>
               <th scope="col">Subcategorias</th>
+              <th scope="col">etiquetas</th>
               <th scope="col">acciones</th>
             </tr>
           </thead>
           <tbody>
-            @foreach ($categories as $category)
+            @foreach ($subcategories as $subcategory)
             <tr>
-                <th scope="row col-1">{{ $category->id }}</th>
-                <td class="col-4">{{ $category->name }}</td>
+                <th scope="row col-1">{{ $subcategory->id }}</th>
+                <td class="col-4">{{ $subcategory->name }}</td>
                 <td class="col-5">
-                    @foreach ($category->subcategories as $subcategory)
-                        <li>{{ $subcategory->name }}</li>
+                    @foreach ($subcategory->tags as $tag)
+                        <span class="badge badge-success">{{ $tag->name }}</span>
                     @endforeach
                 </td>
                 <td class="col-2">
-                    <a href="{{ route('subcategorias', $category->id) }}" >nueva_subcategoría</a> |
-                    <a href="javascript:void(0)" data-toggle="modal" data-target="#exampleModal" data-content="{{ $category->name }}" data-id="{{ $category->id }}" >editar</a> |
-                    <a href="{{ route('eliminar-categoria', $category->id) }}"  onclick="return confirm('¿Desea eleminar la categoria?')">eliminar</a>
+                    <a href="{{ route('etiquetas', $subcategory->id) }}" >nueva_etiqueta</a> |
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#exampleModal" data-content="{{ $subcategory->name }}" data-id="{{ $subcategory->id }}" >editar</a> |
+                    <a href="{{ route('eliminar-subcategoria', $subcategory->id) }}"  onclick="return confirm('¿Desea eleminar la subcategoria?')">eliminar</a>
                 </td>
             </tr>
             @endforeach
           </tbody>
         </table>
-        {{ $categories->links() }}
+        {{ $subcategories->links() }}
     </div>
 </div>
 
@@ -70,18 +73,18 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar categoria</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar subcategoria</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{ route('actualizar-categoria') }}">
+            <form method="POST" action="{{ route('actualizar-subcategoria') }}">
                 <div class="modal-body">
                         @csrf
                         <input type="hidden" id="id" name="id">
                         <div class="form-group">
                                 <!-- <label for="name" class="sr-only">Nombre de Categoría</label> -->
-                                <input type="text" maxlength="200" class="form-control @error('name') is-invalid @enderror"   name="name" id="name" placeholder="Nombre de la categoria" required autofocus>
+                                <input type="text" maxlength="200" class="form-control @error('name') is-invalid @enderror"   name="name" id="name" placeholder="Nombre de la subcategoria" required autofocus>
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

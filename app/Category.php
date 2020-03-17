@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Tag;
+use App\Subcategory;
 
 class Category extends Model
 {
-    public function tags()
+    public function subcategories()
     {
-        return $this->hasMany(Tag::class);
+    	return $this->hasMany(Subcategory::class);
     }
 }

@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Category;
+use App\Subcategory;
 use App\Question;
 
 class Tag extends Model
 {
-    public function category()
+    public function Subcategory()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Subcategory::class);
     }
 
     public function questions()

@@ -9,6 +9,7 @@ use App\Category;
 use App\Tag;
 use DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 class QuestionController extends Controller
 {
@@ -35,6 +36,7 @@ class QuestionController extends Controller
      */
     public function create(Request $request)
     {
+        $this->validator($request->all())->validate();
         $question = new Question();
         $question->content = $request->content;
         $question->save();
@@ -89,7 +91,9 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-        //
+        $question->content = $request->content;
+        $question->save();
+        return $question; 
     }
 
     /**
@@ -117,4 +121,52 @@ class QuestionController extends Controller
         return redirect('preguntas');
     }
 
+    public function tags($id)
+    {
+        $question = Question::find($id);
+        
+        //$tags = DB::table('question_tags')->select('*')->where('question_id', $question->id)->get();
+        $tags = $question->tags;
+
+        $categories = Category::all();
+
+        return view('question-tags', compact('question', 'categories', 'tags'));
+    }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'content' => ['required', 'unique:questions']
+        ]);
+    }
+
+
+
+    public function updateQuestion(Request $request)
+    {
+
+        $this->validator($request->all())->validate();
+        
+        $question = Question::find($request->id);
+
+        $this->update($request, $question);
+
+        return $this->view();
+    }
+
+    public function createTag(Request $request)
+    {
+        $question = Question::find($request->id);
+
+        DB::table('question_tags')->where('question_id', $question->id)->delete();
+
+        if($request->tag){
+            foreach ($request->tag as $tag) {
+                DB::table('question_tags')->insert(
+                    ['tag_id' => $tag, 'question_id' => $question->id, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]
+                );
+            }
+        }
+        return redirect('preguntas');
+    }
 }
