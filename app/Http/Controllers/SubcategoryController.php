@@ -31,7 +31,7 @@ class SubcategoryController extends Controller
      */
     public function create(Request $request)
     {
-        $this->validator($request->all())->validate();
+        //$this->validator($request->all())->validate();
         $subcategoria = new Subcategory();
         $subcategoria->name = $request->name;
         $subcategoria->category_id = $request->category_id;
@@ -123,7 +123,7 @@ class SubcategoryController extends Controller
 
     public function updateSubcategory(Request $request)
     {
-        $this->validator($request->all())->validate();
+        //$this->validator($request->all())->validate();
         
         $subcategory = Subcategory::find($request->id);
 

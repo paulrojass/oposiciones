@@ -34,7 +34,7 @@ class TagController extends Controller
      */
     public function create(Request $request)
     {
-        $this->validator($request->all())->validate();
+        //$this->validator($request->all())->validate();
         $tag = new Tag();
         $tag->name = $request->name;
         $tag->subcategory_id = $request->subcategory_id;
@@ -119,7 +119,7 @@ class TagController extends Controller
 
     public function updateTag(Request $request)
     {
-        $this->validator($request->all())->validate();
+        //$this->validator($request->all())->validate();
         
         $tag = Tag::find($request->id);
 

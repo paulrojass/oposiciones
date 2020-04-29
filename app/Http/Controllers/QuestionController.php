@@ -36,7 +36,7 @@ class QuestionController extends Controller
      */
     public function create(Request $request)
     {
-        $this->validator($request->all())->validate();
+        //$this->validator($request->all())->validate();
         $question = new Question();
         $question->content = $request->content;
         $question->save();
@@ -145,7 +145,7 @@ class QuestionController extends Controller
     public function updateQuestion(Request $request)
     {
 
-        $this->validator($request->all())->validate();
+        //$this->validator($request->all())->validate();
         
         $question = Question::find($request->id);
 

@@ -30,7 +30,7 @@ class CategoryController extends Controller
      */
     public function create(Request $request)
     {
-        $this->validator($request->all())->validate();
+        //$this->validator($request->all())->validate();
         $categoria = new Category();
         $categoria->name = $request->name;
         $categoria->save();
@@ -118,7 +118,7 @@ class CategoryController extends Controller
 
     public function updateCategory(Request $request)
     {
-        $this->validator($request->all())->validate();
+        //$this->validator($request->all())->validate();
         
         $category = Category::find($request->id);
 

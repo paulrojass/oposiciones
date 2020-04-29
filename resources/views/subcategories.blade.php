@@ -40,23 +40,23 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">id</th>
-              <th scope="col">Subcategorias</th>
-              <th scope="col">etiquetas</th>
-              <th scope="col">acciones</th>
+              <th style="width: 5%">id</th>
+              <th style="width: 50%">Subcategorias</th>
+              <th style="width: 30%">etiquetas</th>
+              <th style="width: 15%">acciones</th>
             </tr>
           </thead>
           <tbody>
             @foreach ($subcategories as $subcategory)
             <tr>
-                <th scope="row col-1">{{ $subcategory->id }}</th>
-                <td class="col-4">{{ $subcategory->name }}</td>
-                <td class="col-5">
+                <th scope="row">{{ $subcategory->id }}</th>
+                <td>{{ $subcategory->name }}</td>
+                <td>
                     @foreach ($subcategory->tags as $tag)
                         <span class="badge badge-success">{{ $tag->name }}</span>
                     @endforeach
                 </td>
-                <td class="col-2">
+                <td>
                     <a href="{{ route('etiquetas', $subcategory->id) }}" >nueva_etiqueta</a> |
                     <a href="javascript:void(0)" data-toggle="modal" data-target="#exampleModal" data-content="{{ $subcategory->name }}" data-id="{{ $subcategory->id }}" >editar</a> |
                     <a href="{{ route('eliminar-subcategoria', $subcategory->id) }}"  onclick="return confirm('¿Desea eleminar la subcategoria?')">eliminar</a>

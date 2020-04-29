@@ -37,16 +37,16 @@
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th scope="col">id</th>
-                          <th scope="col">Etiqueta</th>
-                          <th scope="col">acciones</th>
+                          <th style="width: 10%">id</th>
+                          <th style="width: 70%">Etiqueta</th>
+                          <th style="width: 20%">acciones</th>
                         </tr>
                       </thead>
                       <tbody>
                         @foreach ($tags as $tag)
                         <tr>
                             <th scope="row">{{ $tag->id }}</th>
-                            <td class="col-8">{{ $tag->name }}</td>
+                            <td>{{ $tag->name }}</td>
                             <td>
                                 <a href="javascript:void(0)" data-toggle="modal" data-target="#exampleModal" data-content="{{ $tag->name }}" data-id="{{ $tag->id }}" >editar</a> |
                                 <a href="{{ route('eliminar-etiqueta', $tag->id) }}"  onclick="return confirm('¿Desea eleminar la etiqueta?')">eliminar</a>

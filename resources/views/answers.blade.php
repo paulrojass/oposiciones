@@ -53,18 +53,18 @@
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th scope="col">id</th>
-                          <th scope="col">Etiqueta</th>
-                          <th scope="col">Correcta</th>
-                          <th scope="col">acciones</th>
+                          <th style="width: 10%">id</th>
+                          <th style="width: 60%">Etiqueta</th>
+                          <th style="width: 10%">Correcta</th>
+                          <th style="width: 20%">acciones</th>
                         </tr>
                       </thead>
                       <tbody>
                         @foreach ($answers as $answer)
                         <tr>
                             <th scope="row">{{ $answer->id }}</th>
-                            <td class="col-8">{{ $answer->content }}</td>
-                            <td class="col-8">
+                            <td>{{ $answer->content }}</td>
+                            <td>
                             @if ($answer->correct)
                                 Sí
                             @else

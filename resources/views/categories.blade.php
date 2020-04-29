@@ -34,26 +34,26 @@
                 </div>
             </div>
         </div>
-        <table class="table table-striped">
+        <table class="table table-condensed table-striped">
           <thead>
             <tr>
-              <th scope="col">id</th>
-              <th scope="col">Categorias</th>
-              <th scope="col">Subcategorias</th>
-              <th scope="col">acciones</th>
+              <th style="width: 10%">id</th>
+              <th style="width: 40%">Categorias</th>
+              <th style="width: 30%">Subcategorias</th>
+              <th style="width: 20%">acciones</th>
             </tr>
           </thead>
           <tbody>
             @foreach ($categories as $category)
             <tr>
-                <th scope="row col-1">{{ $category->id }}</th>
-                <td class="col-4">{{ $category->name }}</td>
-                <td class="col-5">
+                <th scope="row">{{ $category->id }}</th>
+                <td>{{ $category->name }}</td>
+                <td>
                     @foreach ($category->subcategories as $subcategory)
                         <li>{{ $subcategory->name }}</li>
                     @endforeach
                 </td>
-                <td class="col-2">
+                <td>
                     <a href="{{ route('subcategorias', $category->id) }}" >nueva_subcategoría</a> |
                     <a href="javascript:void(0)" data-toggle="modal" data-target="#exampleModal" data-content="{{ $category->name }}" data-id="{{ $category->id }}" >editar</a> |
                     <a href="{{ route('eliminar-categoria', $category->id) }}"  onclick="return confirm('¿Desea eleminar la categoria?')">eliminar</a>

@@ -64,37 +64,38 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th scope="col">id</th>
-					<th scope="col">Pregunta</th>
-					<th scope="col">Respuestas</th>
-					<th scope="col">etiquetas</th>
-					<th scope="col">acciones</th>
+					<th style="width: 5%">id</th>
+					<th style="width: 40%">Pregunta</th>
+					<th style="width: 25%">Respuestas</th>
+					<th style="width: 15%">etiquetas</th>
+					<th style="width: 15%">acciones</th>
 				</tr>
 			</thead>
 			<tbody>
 				@foreach ($questions as $question)
 				<tr>
-					<th scope="row" class="col-1">{{ $question->id }}</th>
-					<td class="col-4"><em>{{ $question->content }}</em></td>
-					<td class="col-3">
+					<td scope="row">{{ $question->id }}</td>
+					<td><em>{{ $question->content }}</em></td>
+					<td>
 						<ul class="list-group">
 							@foreach ($question->answers as $answer)
 							<li> @if ($answer->correct) <span class="badge badge-secondary">correcta</span> @endif {{ $answer->content }}</li>
 							@endforeach
 						</ul>
 					</td>
-					<td class="col-2">
+					<td>
 						@foreach ($question->tags as $tag)
 							<span class="badge badge-success">{{ $tag->name }}</span>
 						@endforeach
 					</td>
-					<td class="col-2">
+					<td>
 						<a href="{{ route('respuestas', $question->id) }}" >agregar_respuestas</a> |
 						<a href="{{ route('preguntas-etiquetas', $question->id) }}" >agregar_etiquetas</a> |
 						<a href="javascript:void(0)" data-toggle="modal" data-target="#exampleModal" data-content="{{ $question->content }}" data-id="{{ $question->id }}" >editar</a> |
-						<a href="{{ route('eliminar-pregunta', $question->id) }}" onclick="return confirm('¿Desea eleminar la pregunta?')">eliminar</a></td>
-					</tr>
-					@endforeach
+						<a href="{{ route('eliminar-pregunta', $question->id) }}" onclick="return confirm('¿Desea eleminar la pregunta?')">eliminar</a>
+					</td>
+			    </tr>
+				@endforeach
 				</tbody>
 			</table>
 			{{ $questions->links() }}
