@@ -1,0 +1,113 @@
+.find-cand > span {
+    float: left;
+    width: 100%;
+    font-size: 22px;
+    color: #222222;
+    margin: 0;
+    margin-top: 0px;
+    margin-left: 4px;
+    margin-bottom: 36px;
+}
+
+.find-cand-sec {
+    float: left;
+    width: 100%;
+    position: relative;
+    padding-top: 200px;
+    padding-bottom: 140px;
+
+}
+
+a.btn-crear {
+    font-size: 16px;
+    background: #7fa23e;
+    border: 1px solid #7fa23e;
+    color: #ffffff;
+    padding: 13px 30px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    border-radius: 20px;
+    line-height: 14px;
+    font-weight: bold;
+}
+
+a:hover.btn-crear {
+    background: #fff;
+    color: #7fa23e;
+}
+
+.scroll-to.style2 {
+    display: none;
+}
+
+.block.remove-top {
+    padding-top: 90px;
+}
+
+.heading {
+    float: left;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.chosen-container{
+    font-size:26px;
+}
+
+.chosen-container > .chosen-single{
+    line-height: 40px;
+}
+
+.chosen-container .chosen-results li {
+    font-size: 20px;
+}
+
+
+
+.new-slide-2 {
+    background: rgb(127,162,62);
+    background: -moz-linear-gradient(-150deg, rgba(127,162,62,0.8) 0%, rgba(54,63,136,0.8) 71%, rgba(54,63,136,0.8) 100%);
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(127,162,62,0.8)), color-stop(71%,rgba(54,63,136,0.8)), color-stop(100%,rgba(54,63,136,0.8)));
+    background: -webkit-linear-gradient(-150deg, rgba(127,162,62,0.8) 0%,rgba(54,63,136,0.8) 71%,rgba(54,63,136,0.8) 100%);
+    background: -o-linear-gradient(-150deg, rgba(127,162,62,0.8) 0%,rgba(54,63,136,0.8) 71%,rgba(54,63,136,0.8) 100%);
+    background: -ms-linear-gradient(-150deg, rgba(127,162,62,0.8) 0%,rgba(54,63,136,.02) 71%,rgba(54,63,136,0.8) 100%);
+    background: linear-gradient(-150deg, rgba(127,162,62,0.8) 0%,rgba(54,63,136,0.8) 71%,rgba(54,63,136,0.8) 100%);
+}
+
+
+.inner-header::before {
+    background: rgb(127,162,62);
+    background: -moz-linear-gradient(45deg, rgba(127,162,62,0.4) 0%, rgba(127,162,62,0.8) 71%, rgba(127,162,62,0.8) 100%);
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(127,162,62,0.8)), color-stop(71%,rgba(127,162,62,0.8)), color-stop(100%,rgba(127,162,62,0.8)));
+    background: -webkit-linear-gradient(45deg, rgba(127,162,62,0.4) 0%,rgba(127,162,62,0.8) 71%,rgba(127,162,62,0.8) 100%);
+    background: -o-linear-gradient(45deg, rgba(127,162,62,0.4) 0%,rgba(127,162,62,0.8) 71%,rgba(127,162,62,0.8) 100%);
+    background: -ms-linear-gradient(45deg, rgba(127,162,62,0.4) 0%,rgba(54,63,136,.02) 71%,rgba(127,162,62,0.8) 100%);
+    background: linear-gradient(45deg, rgba(127,162,62,0.4) 0%,rgba(127,162,62,0.8) 71%,rgba(127,162,62,0.8) 100%);
+}
+
+.chbox{
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 16px;
+}
+
+.job-search form button {
+
+    float: none;
+    display: inline-block;
+    border: 2px solid;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
+    padding: 13px 30px;
+    font-family: Open Sans;
+    font-size: 15px;
+    margin-top: 40px;
+    color: #ffffff;
+}

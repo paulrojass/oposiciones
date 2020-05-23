@@ -14,11 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 });
 
+Auth::routes();
 
-Auth::routes(['register' => false]);
+Route::group(['middleware' => ['role:user']], function () {
+    Route::get('crear-examen', 'TestController@newTest')->name('crear-examen')->middleware('auth');
+	Route::get('mi-perfil', 'UserController@myProfile')->name('mi-perfil');
+    Route::post('resultados-busqueda', 'TestController@searchQuestions')->name('resultados-busqueda');
+    Route::post('examen', 'TestController@test')->name('test');
+});
+Route::post('ajax-search-tags-list', 'TagController@ajaxSearchTagsList');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -49,3 +56,20 @@ Route::post('actualizar-respuesta', 'AnswerController@updateAnswer')->name('actu
 
 Route::get('pregunta/{id}/etiquetas', 'QuestionController@tags')->name('preguntas-etiquetas');
 Route::post('agregar-etiqueta-pregunta', 'QuestionController@createTag')->name('agregar-etiqueta-pregunta');
+
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    Artisan::call('view:clear');
+    return "Cache is cleared";
+});
+
+
+Route::get('logout', function ()
+{
+    auth()->logout();
+    Session()->flush();
+
+    return Redirect::to('/');
+})->name('logout');

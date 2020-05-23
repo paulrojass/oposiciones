@@ -9,6 +9,11 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+
 class RegisterController extends Controller
 {
     /*
@@ -29,7 +34,17 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
+    /*protected function redirectTo()*/
+    protected function redirectPath()
+    {
+        $user = auth()->user();
+
+        if ($user->hasRole('admin')) return '/home';
+        else return 'mi-perfil';
+    }
+
+
 
     /**
      * Create a new controller instance.
@@ -70,4 +85,23 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        // Le asignamos el rol de Cliente
+        $user->assignRole('user');
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                       ?: redirect($this->redirectPath());
+    }
+
+
+
+
 }

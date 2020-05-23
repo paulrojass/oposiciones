@@ -18,4 +18,16 @@ class Question extends Model
     {
     	return $this->hasMany(Answer::class);
     }
+
+
+/*Query Scopes*/
+	public function scopeTags(Builder $query, $busqueda)
+	{
+		if($busqueda){
+			return $query->where('title', 'LIKE', '%'.$busqueda.'%');
+		}
+	}
+
+
+
 }

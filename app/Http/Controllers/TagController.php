@@ -135,4 +135,11 @@ class TagController extends Controller
             'name' => ['required', 'unique:tags']
         ]);
     }
+
+
+    public function ajaxSearchTagsList(Request $request)
+    {
+        $tags = Tag::where('subcategory_id', $request->subcategory_id)->get();
+        return view('content.client-search-tags-list', compact('tags'));
+    }
 }
