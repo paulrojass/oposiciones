@@ -2,6 +2,8 @@
 
 @section('title', 'Inicio')
 
+@section('header_type', 'stick-top')
+
 @section('content')
 <section>
 	<div class="block no-padding">

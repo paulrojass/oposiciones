@@ -17,8 +17,9 @@ class CreateTestsTable extends Migration
             $table->id();
             $table->text('tags');
             $table->text('questions');
-            $table->text('answers');
+            $table->text('answers')->nullable();
             $table->boolean('finished')->default(0);
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');            
             $table->timestamps();
         });
     }

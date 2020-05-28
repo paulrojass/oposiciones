@@ -2,6 +2,8 @@
 
 @section('title', 'Perfil de usuario')
 
+@section('header_type', 'stick-top style3')
+
 @section('content')
 <section class="overlape">
 	<div class="block no-padding">
@@ -52,37 +54,41 @@
 					 				<h3 class="text-center">Exámenes</h3>
 					 				<div class="job-list-modern">
 									 	<div class="job-listings-sec no-border">
+											@foreach($user->tests as $test)
 
+											@php
+												$tags = $test->tags;
+												$tags_array = explode(",", $tags);
+												$tags = App\Tag::find($tags_array);
+											@endphp
 
-											@foreach($user->tests() as $test)
 											<div class="job-listing wtabs noimg">
 												<div class="job-title-sec">
-													<h3><a href="#" title="">Web Designer / Developer</a></h3>
-													<span>Massimo Artemisis</span>
-													<div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
+													<h3><a href="{{ url('test/'.$test->id) }}" title="">
+														{{ $tags[0]->subcategory->category->name }} / {{ $tags[0]->subcategory->name }}
+														</a>
+													</h3>
+													<span>
+														@foreach ($tags as $tag)
+															{{ $tag->name }}@if(!$loop->last), @endif
+														@endforeach
+													</span>
+													{{--<div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>--}}
 												</div>
 												<div class="job-style-bx">
-													<span class="job-is ft">Full time</span>
+													@if ($test->finished)
+													<span class="job-is pt ">Finalizado</span>
+													@else
+													<span class="job-is ft ">Pendiente</span>
+													@endif
 													
-													<i>5 months ago</i>
+													<i>{{ $test->updated_at->diffForHumans() }}</i>
 												</div>
 											</div>
 
-
 											@endforeach
 
-											<div class="job-listing wtabs noimg">
-												<div class="job-title-sec">
-													<h3><a href="#" title="">Categoría / Subcategoría</a></h3>
-													<span>etiqueta1, etiqueta2, etiqueta,3</span>
-													<div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
-												</div>
-												<div class="job-style-bx">
-													<span class="job-is pt ">Finalizado</span>
-													
-													<i>5 months ago</i>
-												</div>
-											</div><!-- Job -->
+
 										</div>
 									 </div>
 					 			</div>

@@ -10,6 +10,9 @@ use App\Subcategory;
 use App\Tag;
 use App\Question;
 
+use Auth;
+use DB;
+
 class TestController extends Controller
 {
     /**
@@ -36,7 +39,7 @@ class TestController extends Controller
         return view('examen', compact('test', 'questions_id'));
     }
 
-    public function newTest()
+    public function createTest()
     {
 
         $subcategories = Subcategory::all();
@@ -51,9 +54,14 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
+        $questions_string = $this->questionString($request->tag, $request->number);
+        $tags_string = $this->tagString($request->tag);
         $test = new Test;
-        $test->questions = $request->questions;
+        $test->questions = $questions_string;
+        $test->tags = $tags_string;
+        $test->user_id = auth()->user()->id;
         $test->save();
+        return $test;
     }
 
     /**
@@ -64,7 +72,11 @@ class TestController extends Controller
      */
     public function show(Test $test)
     {
-        //
+        $questions_array = explode(",", $test->questions);
+
+        $questions = Question::find($questions_array);
+
+        return view('client.test', compact('test', 'questions'));
     }
 
     /**
@@ -103,24 +115,60 @@ class TestController extends Controller
 
     public function searchQuestions(Request $request)
     {
-/*        $tags = $request->tags;
-        foreach ($tags as $tag) {
-            $questions = DB::table('question_tags')->where('tag_id', $tag)->get();
-        }
-*/
 
-        dd($request);
-        $questions = Question::all();
-        return view('client.resultados-busqueda', compact('questions'));
+        $tags = isset($request->tag) ? json_decode($request->tag) : array();
+
+        $questions = $this->questionsList($tags);
+
+        return view('content.client-search-results', compact('questions'));
     }
 
-
-    public function createTest($questions)
+    public function questionsList($tags)
     {
-        $test = new Test;
-        $test->questions = $questions;
-        $test = save();
-        return $test;
+        $questions = (new Question)->newCollection();
+        foreach ($tags as $tag => $value) {
+            $tag = Tag::find($value);
+            $parte = $tag->questions;
+            $questions = $questions->merge($parte);
+        }
+        return $questions; 
     }
 
+    public function newTest(Request $request)
+    {
+        $test = $this->store($request);
+
+        return $this->show($test);
+    }
+
+    public function questionString($tags, $number)
+    {
+        $questions = $this->questionsList($tags);
+
+        $questions = $questions->random($number);
+
+        $questions_array = $questions->modelKeys();
+
+        $questions_string = implode(",", $questions_array);
+
+        return $questions_string;
+
+    }
+
+    public function tagString($tags)
+    {
+        $tags_string = implode(",", $tags);
+
+        return $tags_string;
+    }
+
+    public function testView($test_id)
+    {
+        $test = Test::find($test_id);
+
+        if($test->user_id != auth()->user()->id) return back();
+
+        return $this->show($test);
+
+    }
 }

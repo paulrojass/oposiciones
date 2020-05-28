@@ -21,7 +21,7 @@
 									<span>La busqueda arrojó la cantidad de preguntas necesarias para un examen, si desea comenzarlo haga clic en el siguiente enlace</span>
 								</div>
 								<div class="simple-text-block">
-									<a href="{{ route('examen') }}" title="">Iniciar Examen</a>
+									<a href="{{ route('examen', ['questions' => $questions]) }}" title="">Iniciar Examen</a>
 								</div>
 							</div>
 							@else
@@ -31,7 +31,7 @@
 									<span>Las etiquetas seleccionadas no tienen una cantidad de preguntas necesarias para realizar un examen por favor intente con otra búsqueda</span>
 								</div>
 								<div class="simple-text-block">
-									<a href="{{ url('crear-examen') }}" title="">Volver a buscar</a>
+									<a href="{{ route('crear-examen') }}" title="">Volver a buscar</a>
 								</div>
 							</div>
 							@endif

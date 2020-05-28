@@ -20,13 +20,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => ['role:user']], function () {
-    Route::get('crear-examen', 'TestController@newTest')->name('crear-examen')->middleware('auth');
+    Route::get('crear-examen', 'TestController@createTest')->name('crear-examen')->middleware('auth');
+    Route::post('new-test', 'TestController@newTest')->name('new-test');
 	Route::get('mi-perfil', 'UserController@myProfile')->name('mi-perfil');
-    Route::post('resultados-busqueda', 'TestController@searchQuestions')->name('resultados-busqueda');
-    Route::post('examen', 'TestController@test')->name('test');
+    Route::get('test/{id}', 'TestController@testView')->name('examen');
 });
 Route::post('ajax-search-tags-list', 'TagController@ajaxSearchTagsList');
+Route::get('ajax-search-questions', 'TestController@searchQuestions');
 
+
+//Rutas anteriores
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('categorias', 'CategoryController@view')->name('categorias');

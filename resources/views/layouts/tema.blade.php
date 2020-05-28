@@ -68,7 +68,7 @@
 		</div>
 	</div>
 	
-	<header class="stick-top style3">
+	<header class="@yield('header_type')">
 		<div class="menu-sec">
 			<div class="container">
 				<div class="logo">

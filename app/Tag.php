@@ -9,7 +9,7 @@ use App\Question;
 
 class Tag extends Model
 {
-    public function Subcategory()
+    public function subcategory()
     {
         return $this->belongsTo(Subcategory::class);
     }

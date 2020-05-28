@@ -1,68 +1,65 @@
 @extends('layouts.tema')
+
 @section('title', 'Crear Examen')
-@section('header_type', 'stick-top forsticky')
+
+@section('header_type', 'gradient')
 
 @section('content')
-	<section>
-		<div class="block no-padding">
-			<div class="container fluid">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="main-featured-sec">
-							<div class="new-slide-2">
-								{{-- <img src="http://placehold.it/1920x800" alt="" /> --}}
-								<img src="" alt="" />
-							</div>
-							<div class="job-search-sec ">
-								<div class="job-search ">
-									<h3>Seleccione el contenido de su Examen</h3>
-									<span>Al elegir las etiquetas de acuerdo a la categoría deseada, se realizara una busqueda de preguntas para crear un examen</span>
-									<form method="POST" action="{{ route('resultados-busqueda') }}">
-										@csrf
-										<div class="row">
-											<div class="col-lg-12 col-md-5 col-sm-12 col-xs-12">
-												<div class="job-field">
-													<select data-placeholder="City, province or region" class="chosen-city" id="select-subcategories" name="subcategory">
-														<option value = "">Selecciona una subcategoría</option>
-														@php($categoria = "")
-														@foreach($subcategories as $subcategory)
-														@if($subcategory->category->name != $categoria)
-															@php($categoria = $subcategory->category->name)
-																@if(!$loop->first)
-																	</optgroup>
-																@endif
-																<optgroup label="{{$categoria}}">
-																	<option value="{{$subcategory->id}}">{{$subcategory->name}}</option>
-														@else
-															<option value="{{$subcategory->id}}">{{$subcategory->name}}</option>
-															@if($loop->last)
-																</optgroup>
-															@endif
-														@endif
-														@endforeach
-													</select>
-													<i class="la la-map-marker"></i>
-												</div>
-											</div>
-											<div id="etiquetas">
-												
-											</div>
-										</div>
-									</form>
-
-								</div>
-							</div>
-
-						</div>
-					</div>
+<section style="min-height: 600px">
+<form method="POST" action="{{ route('new-test') }}">
+	<div class="block no-padding">
+		<div class="container">
+			 <div class="row no-gape">
+			 	<aside class="col-lg-6 column border-right">
+						@csrf
+	 					<div class="widget">
+	 						<span class="pf-title">Categorías y Subcategorías</span>
+	 						<div class="pf-field">
+	 							<select data-placeholder="Por favor selecciona una subcategoría"
+	 									class="chosen"
+	 									id="select-subcategories"
+	 									name="subcategory">
+									<option value = "">Selecciona una subcategoría</option>
+									@php($categoria = "")
+									@foreach($subcategories as $subcategory)
+									@if($subcategory->category->name != $categoria)
+										@php($categoria = $subcategory->category->name)
+											@if(!$loop->first)
+												</optgroup>
+											@endif
+											<optgroup label="{{$categoria}}">
+												<option value="{{$subcategory->id}}">{{$subcategory->name}}</option>
+									@else
+										<option value="{{$subcategory->id}}">{{$subcategory->name}}</option>
+										@if($loop->last)
+											</optgroup>
+										@endif
+									@endif
+									@endforeach
+								</select>
+	 						</div>
+	 					</div>
+				 		<div class="widget" id="etiquetas">
+						{{-- AQUI SE CARGAN LAS ETIQUETAS DINAMICAMENTE --}}
+				 		</div>
+			 	</aside>
+			 	<div class="col-lg-6 column" id="questions-result">
+					{{-- AQUI SE CARGA EL RESULTADO DE LA BUSQUEDA DE PREGUNTAS --}}
 				</div>
-			</div>
+			 </div>
 		</div>
-	</section>
+	</div>
+</form>
+</section>
 @endsection
 
 
 @section('scripts')
+
+<script src="{{ asset('tema/js/jquery.scrollbar.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('tema/js/rslider.js') }}" type="text/javascript"></script>
+
+
 <script>	
 $(function(){
 	$.ajaxSetup({
@@ -76,8 +73,10 @@ $(function(){
 		$.ajax({
 			url: '/ajax-search-tags-list',
 			type: 'post',
-/*		contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
-		processData: false, // NEEDED, DON'T OMIT THIS	*/		
+		/*
+ 		contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+		processData: false, // NEEDED, DON'T OMIT THIS
+		*/		
 			data: {subcategory_id: subcategory_id, _token: _token}
 		})
 		.done(function(response) {
@@ -90,6 +89,27 @@ $(function(){
 			console.log("complete");
 		});
 	});
-})
+
+	/*Busqueda en checkbox*/
+	$('#etiquetas').on('click', 'input:checkbox', function() {
+		searchQuestions();
+	});
+});
+
+function searchQuestions(){
+	var tag = [];
+	$(".checkbox-tag:checked").each(function() {
+        tag.push($(this).val());
+    });
+	$.ajax({
+		url:'/ajax-search-questions?tag='+JSON.stringify(tag),
+		type:'get',
+		success:function(response){
+			$('#questions-result').html('');
+			$('#questions-result').html(response);
+		}
+	});
+
+}
 </script>
 @endsection
