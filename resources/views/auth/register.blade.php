@@ -14,7 +14,7 @@
                         <div class="account-popup">
                             <h3> Registrate </h3>
                             <!-- <span>Lorem ipsum dolor sit amet consectetur adipiscing elit odio duis risus at lobortis ullamcorper</span> -->
-                            <form method="POST" action="{{ route('login') }}">
+                            <form method="POST" action="{{ route('register') }}">
                                 @csrf
                                 <div class="cfield">
                                     <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nombre" value="{{ old('name') }}" required />

@@ -37,12 +37,17 @@
 
 					<!-- <a data-toggle="modal" data-target="#modal-edit-profile" title=""><span class="job-is ft">Cambiar nombre</span></a> -->
 
-
+										@if(auth()->user()->tests)
 					 					<ul class="tags-jobs">
-						 					<li><i class="la la-file-text"></i>Examenes Creados</li>
-						 					<li><i class="la la-file-text"></i>Examenes Finalizados</li>
-						 					<li><i class="la la-file-text"></i>Examenes Pendientes</li>
+						 					<li><i class="la la-file-text"></i>{{ auth()->user()->tests->count() }} Examenes Creados</li>
+						 					<li><i class="la la-file-text"></i>{{ auth()->user()->tests->where('finished', 1)->count() }} Examenes Finalizados</li>
+						 					<li><i class="la la-file-text"></i>{{ auth()->user()->tests->where('finished', 0)->count() }} Examenes Pendientes</li>
 						 				</ul>
+						 				@else
+					 					<ul class="tags-jobs">
+						 					<li><i class="la la-file-text"></i>Todavía no ha creado examenes</li>
+						 				</ul>
+						 				@endif
 					 				</div>
 					 			</div><!-- Job Head -->
 			 					<!-- </div> -->
@@ -51,17 +56,16 @@
 			 			<div class="job-wide-devider">
 						 	<div class="row">
 						 		<div class="recent-jobs">
+						 			@if(auth()->user()->tests)
 					 				<h3 class="text-center">Exámenes</h3>
 					 				<div class="job-list-modern">
 									 	<div class="job-listings-sec no-border">
-											@foreach($user->tests as $test)
-
+											@foreach($user->tests->sortByDesc('created_at') as $test)
 											@php
 												$tags = $test->tags;
 												$tags_array = explode(",", $tags);
 												$tags = App\Tag::find($tags_array);
 											@endphp
-
 											<div class="job-listing wtabs noimg">
 												<div class="job-title-sec">
 													<h3><a href="{{ url('test/'.$test->id) }}" title="">
@@ -82,15 +86,17 @@
 													<span class="job-is ft ">Pendiente</span>
 													@endif
 													
-													<i>{{ $test->updated_at->diffForHumans() }}</i>
+													<i>Actualizado {{ $test->updated_at->diffForHumans() }}</i>
 												</div>
 											</div>
-
 											@endforeach
-
-
 										</div>
-									 </div>
+									</div>
+									@else
+										<div class="browse-all-cat">
+										<a href="{{ route('crear-examen') }}">Crear Examen</a>
+										</div>
+									@endif
 					 			</div>
 						 	</div>
 						</div>

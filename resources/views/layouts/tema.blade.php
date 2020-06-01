@@ -39,10 +39,10 @@
 			<div class="res-logo"><a href="{{ url('/') }}" title=""><img src="{{ asset('tema/images/logo.png') }}" alt="" /></a></div>
 			<div class="menu-resaction">
 				<div class="res-openmenu">
-					<img src="images/icon5.png" alt="" /> Menu
+					<img src="{{ asset('tema/images/icon5.png') }}" alt="" /> Menu
 				</div>
 				<div class="res-closemenu">
-					<img src="images/icon6.png" alt="" /> Close
+					<img src="{{ asset('tema/images/icon6.png') }}" alt="" /> Close
 				</div>
 			</div>
 		</div>
@@ -59,12 +59,7 @@
 					<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Inciar Sessión</a></li>
 				</ul>
 				@endauth
-			</div><!-- Btn Extras -->
-			<form class="res-search">
-				<input type="text" placeholder="Job title, keywords or company name" />
-				<button type="submit"><i class="la la-search"></i></button>
-			</form>
-			
+			</div><!-- Btn Extras -->			
 		</div>
 	</div>
 	

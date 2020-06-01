@@ -9,6 +9,7 @@ use App\Category;
 use App\Subcategory;
 use App\Tag;
 use App\Question;
+use App\Answer;
 
 use Auth;
 use DB;
@@ -56,8 +57,10 @@ class TestController extends Controller
     {
         $questions_string = $this->questionString($request->tag, $request->number);
         $tags_string = $this->tagString($request->tag);
+        $answers_string = $this->answerString($request->number);
         $test = new Test;
         $test->questions = $questions_string;
+        $test->answers = $answers_string;
         $test->tags = $tags_string;
         $test->user_id = auth()->user()->id;
         $test->save();
@@ -72,11 +75,17 @@ class TestController extends Controller
      */
     public function show(Test $test)
     {
+        if ($test->finished) return $this->testFinished($test);
+
         $questions_array = explode(",", $test->questions);
 
         $questions = Question::find($questions_array);
 
-        return view('client.test', compact('test', 'questions'));
+        $answers = explode(",", $test->answers);
+
+        //$answers = Answer::find($answers_array);
+        
+        return view('client.test', compact('test', 'questions', 'answers'));
     }
 
     /**
@@ -155,6 +164,14 @@ class TestController extends Controller
 
     }
 
+    public function answerString($number){
+        $answers = array();
+        for ($i=0; $i < $number; $i++) { 
+            array_push($answers, 0);
+        }
+        return implode(',', $answers);
+    }
+
     public function tagString($tags)
     {
         $tags_string = implode(",", $tags);
@@ -171,4 +188,76 @@ class TestController extends Controller
         return $this->show($test);
 
     }
+
+    public function saveTest(Request $request)
+    {
+        if(!$request->answer) return back();
+        $answers_array = $this->answersComplete($request);
+
+        $answers_string = implode(",", $answers_array);
+
+        $test = Test::find($request->test_id);
+        $test->answers = $answers_string;
+
+        if(!in_array(0, $answers_array)) $test->finished = 1;
+        else $test->finished = 0;
+
+        $test->save();
+
+        if ($test->finished) return $this->testFinished($test);
+        return redirect('mi-perfil');
+    }
+
+    public function answersComplete(Request $request)
+    {
+        $answers = array();
+        for ($i = 0; $i < $request->value ; $i++) { 
+            if(array_key_exists($i+1, $request->answer))
+            {
+                array_push($answers, $request->answer[$i+1]);
+            }else{
+                array_push($answers, 0);
+            }
+        }
+        return $answers;
+    }
+
+    public function evaluate(Test $test)
+    {
+        $questions = explode(',', $test->questions);
+
+        $correct = $this->correctAnswers($questions);
+
+        $answers = explode(',', $test->answers);
+
+        $incorrect = array_diff($answers, $correct);
+
+        $result = 100 - (sizeof($incorrect)*100) / sizeof($answers);
+
+        return $result;
+    }
+
+    public function correctAnswers($questions)
+    {
+        $correct = array();
+        foreach ($questions as $question) {
+            $answer = Answer::where('question_id', $question)->where('correct', 1)->pluck('id')->first();
+            array_push($correct, $answer);
+        }
+        return $correct;
+    }
+
+    public function testFinished(Test $test)
+    {
+        $questions = Question::find(explode(',', $test->questions));
+
+        $correct = Answer::find($this->correctAnswers(explode(',', $test->questions)));
+
+        $answers = Answer::find(explode(',',$test->answers));
+
+        $result = $this->evaluate($test);
+
+        return view('client.test-finished', compact('test', 'result', 'questions', 'answers', 'correct' ));
+    }
+
 }

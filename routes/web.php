@@ -24,6 +24,7 @@ Route::group(['middleware' => ['role:user']], function () {
     Route::post('new-test', 'TestController@newTest')->name('new-test');
 	Route::get('mi-perfil', 'UserController@myProfile')->name('mi-perfil');
     Route::get('test/{id}', 'TestController@testView')->name('examen');
+    Route::post('save-test', 'TestController@saveTest')->name('save-test');
 });
 Route::post('ajax-search-tags-list', 'TagController@ajaxSearchTagsList');
 Route::get('ajax-search-questions', 'TestController@searchQuestions');
