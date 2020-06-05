@@ -57,11 +57,11 @@
 										$seleccionada = $question->answers->where('id', $answers[$iteracion - 1])->first();
 										/*dd($seleccionada);*/
 										if($seleccionada->correct == 1){
-											$incorrectas = $question->answers->where('correct',0)->where('id','<>',$seleccionada->id)->random(4);
+											$incorrectas = $question->answers->where('correct',0)->where('id','<>',$seleccionada->id)->random(3);
 											$answers2 = $incorrectas->push($seleccionada);
 										}else{
 											$correcta = $question->answers->where('correct',1);
-											$incorrectas = $question->answers->where('correct',0)->where('id','<>',$seleccionada->id)->random(3);
+											$incorrectas = $question->answers->where('correct',0)->where('id','<>',$seleccionada->id)->random(2);
 											$answers2 = $incorrectas->merge($correcta);
 											$answers2 = $answers2->push($seleccionada);
 										}
@@ -69,7 +69,7 @@
 									@else
 										@php
 										$correcta = $question->answers->where('correct',1);
-										$incorrectas = $question->answers->where('correct',0)->random(4);
+										$incorrectas = $question->answers->where('correct',0)->random(3);
 										$answers2 = $incorrectas->merge($correcta);
 										@endphp
 									@endif
