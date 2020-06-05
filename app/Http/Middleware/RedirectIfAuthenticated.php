@@ -21,7 +21,7 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
             $user = auth()->user();
 
-            if ($user->hasRole('admin')) return redirect('/home');
+            if ($user->hasRole('administrator')) return redirect('/home');
             else return redirect('mi-perfil');
             //return redirect(RouteServiceProvider::HOME);
         }

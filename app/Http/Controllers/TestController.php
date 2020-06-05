@@ -10,6 +10,7 @@ use App\Subcategory;
 use App\Tag;
 use App\Question;
 use App\Answer;
+use App\User;
 
 use Auth;
 use DB;
@@ -260,4 +261,22 @@ class TestController extends Controller
         return view('client.test-finished', compact('test', 'result', 'questions', 'answers', 'correct' ));
     }
 
+    public function adminView($user_id)
+    {
+        $user = User::find($user_id);
+
+        $tests = array();
+        $results = array();
+        $tags = array();
+        foreach ($user->tests as $test) {
+            $result = $this->evaluate($test);
+            array_push($tests, $test->id);
+            array_push($results, $result);
+            $lista_tags = explode(',', $test->tags);
+            array_push($tags, $lista_tags[0]);
+
+        }
+
+        return view('user-test', compact('user','tests','results', 'tags'));
+    }
 }

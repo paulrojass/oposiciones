@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Question;
 use Illuminate\Http\Request;
 
+use App\Subcategory;
 use App\Category;
 use App\Tag;
 use DB;
@@ -107,11 +108,16 @@ class QuestionController extends Controller
         return $question->delete();
     }
 
-    public function view()
+    public function view(Request $request)
     {
-        $questions = Question::orderBy('created_at', 'desc')->paginate(6);
-        $categories = Category::all();
-        return view('questions', compact('questions', 'categories'));
+       if ($request)
+        {
+            $query=trim($request->get('searchText'));
+            $questions=Question::where('content','LIKE','%'.$query.'%')->orderBy('created_at', 'desc')->paginate(100);
+            $categories = Category::all();
+            return view('questions', compact('questions', 'categories', 'query'));
+        }
+        
     }
 
     public function delete($id)
@@ -124,11 +130,13 @@ class QuestionController extends Controller
     public function tags($id)
     {
         $question = Question::find($id);
-        
-        //$tags = DB::table('question_tags')->select('*')->where('question_id', $question->id)->get();
-        $tags = $question->tags;
 
+       //$tags = DB::table('question_tags')->select('*')->where('question_id', $question->id)->get();
+        $tags = $question->tags;
+        
         $categories = Category::all();
+    
+       
 
         return view('question-tags', compact('question', 'categories', 'tags'));
     }

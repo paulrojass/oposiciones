@@ -72,7 +72,11 @@
 				<div class="btn-extars">
 					@auth
 					<ul class="account-btns">
+						@if (auth()->user()->hasRole('administrator'))
+						<li><a href="{{ route('home') }}" title=""><i class="la la-list-o"></i>Panel</a></li>
+						@else
 						<li><a href="{{ route('mi-perfil') }}" title=""><i class="la la-user"></i>Mi cuenta</a></li>
+						@endif
 						<li><a href="{{ route('logout') }}" title=""><i class="la la-external-link-square"></i>Cerrar Sesión</a></li>
 
 					</ul>
@@ -83,6 +87,8 @@
 					</ul>
 					@endauth
 				</div><!-- Btn Extras -->
+				@auth
+				@if (auth()->user()->hasRole('user'))
 				<nav>
 					<ul>
 						<li class="menu-item">
@@ -90,6 +96,8 @@
 						</li>
 					</ul>
 				</nav><!-- Menus -->
+				@endif
+				@endauth
 			</div>
 		</div>
 	</header>

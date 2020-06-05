@@ -30,7 +30,7 @@
 	</div>
 </section>
 
-<section>
+<section id="scroll-here">
 	<div class="block">
 		<div class="container">
 			<div class="row">

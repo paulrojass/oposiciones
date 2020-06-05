@@ -32,7 +32,7 @@ class LoginController extends Controller
     {
         $user = auth()->user();
 
-        if ($user->hasRole('admin')) return '/home';
+        if ($user->hasRole('administrator')) return '/home';
         else return 'mi-perfil';
     }
 

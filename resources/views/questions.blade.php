@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('title', 'Preguntas')
@@ -10,9 +9,9 @@
 @section('content')
 <div class="container">
 	<div class="row justify-content-center">
-		<div class="col-md-8">
+		<div class="col-md-8 quest">
 			<div class="card">
-				<div class="card-header">Nueva Pregunta</div>
+				<div class="card-header">Crear Nueva Pregunta</div>
 				<div class="card-body">
 					<form method="POST" action="{{ route('agregar-pregunta') }}">
 						@csrf
@@ -25,7 +24,7 @@
                                 </span>
                             @enderror
 						</div>
-						<p>Selecciona las etiquetas que indetifiquen la pregunta</p>
+						<!--<p>Selecciona las etiquetas que indetifiquen la pregunta</p>
 						@if($categories->count()>0)
 						@foreach ($categories as $category)
 						<ul class="list-group list-group-flush">
@@ -48,9 +47,9 @@
 						  </li>
 						</ul>
 						@endforeach
-						@endif
+						@endif-->
 						<div class="form-group row mb-0">
-							<div class="col-md-8 offset-md-4">
+							<div class="col-md-8 boton-crear">
 								<button type="submit" class="btn btn-primary">
 									agregar
 								</button>
@@ -60,14 +59,17 @@
 				</div>               
 			</div>
 		</div>
-
+		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 buscador">
+			<h3>Preguntas guardadas</h3>
+			@include('search')
+		</div>
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th style="width: 5%">id</th>
-					<th style="width: 40%">Pregunta</th>
-					<th style="width: 25%">Respuestas</th>
-					<th style="width: 15%">etiquetas</th>
+					<th style="width: 20%">Pregunta</th>
+					<th style="width: 50%">Respuestas</th>
+					<th style="width: 10%">etiquetas</th>
 					<th style="width: 15%">acciones</th>
 				</tr>
 			</thead>

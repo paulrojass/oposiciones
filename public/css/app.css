@@ -921,7 +921,7 @@ pre code {
 }
 
 .offset-4 {
-  margin-left: 33.3333333333%;
+  margin-left: 0;
 }
 
 .offset-5 {
@@ -1132,7 +1132,7 @@ pre code {
   }
 
   .offset-sm-4 {
-    margin-left: 33.3333333333%;
+    margin-left: 0;
   }
 
   .offset-sm-5 {
@@ -1344,7 +1344,7 @@ pre code {
   }
 
   .offset-md-4 {
-    margin-left: 33.3333333333%;
+    margin-left: 0,
   }
 
   .offset-md-5 {
@@ -4966,6 +4966,7 @@ input[type=button].btn-block {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  margin-bottom:30px;
 }
 
 .card > hr {
@@ -4984,9 +4985,9 @@ input[type=button].btn-block {
 }
 
 .card-body {
-  flex: 1 1 auto;
-  min-height: 1px;
-  padding: 1.25rem;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 30px 30px 20px 30px;
 }
 
 .card-title {
@@ -7502,7 +7503,7 @@ button.bg-dark:focus {
 }
 
 .justify-content-center {
-  justify-content: center !important;
+  justify-content: left;
 }
 
 .justify-content-between {
@@ -10882,3 +10883,45 @@ a.text-dark:focus {
   }
 }
 
+/*custom*/
+
+.buscador {
+    margin-top: 40px;
+    margin-bottom: 15px;
+    padding-left: 0px;
+}
+
+.quest {
+    padding-left: 0px;
+}
+
+.boton-crear {
+    padding-left: 0px;
+}
+
+.col-md-8 {
+    padding-left: 0px;
+}
+
+.categoria h4 {
+    background: #f5f5f5;
+    padding: 10px;
+}
+
+dl.row.tags {
+    padding: 10px;
+}
+
+dl.row.tags {
+    padding: 10px;
+    
+}
+
+dl.row.tags:not(:last-child) {
+    border-bottom: 1px solid #d2d2d2;
+}
+
+li.list-group-item.categoria {
+    padding-left: 0px;
+    border-bottom: none;
+}
