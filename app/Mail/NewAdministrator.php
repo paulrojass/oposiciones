@@ -33,6 +33,6 @@ class NewAdministrator extends Mailable
      */
     public function build()
     {
-        return $this->from('info@meforma.com')->subject('Datos de acceso a Meforma.com');->view('mails.new_administrator');
+        return $this->from('info@meforma.com')->subject('Datos de acceso a Meforma.com')->view('mails.new_administrator');
     }
 }
