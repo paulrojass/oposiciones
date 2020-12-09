@@ -45,6 +45,7 @@ class TestController extends Controller
     {
 
         $subcategories = Subcategory::all();
+        if($subcategories->count() == 0) return back();
         return view('client.crear-examen', compact('subcategories'));
     }
 

@@ -14,6 +14,7 @@ class CreateTestsTable extends Migration
     public function up()
     {
         Schema::create('tests', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
             $table->text('tags');
             $table->text('questions');

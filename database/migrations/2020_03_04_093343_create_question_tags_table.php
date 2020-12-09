@@ -14,6 +14,7 @@ class CreateQuestionTagsTable extends Migration
     public function up()
     {
         Schema::create('question_tags', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
             $table->unsignedBigInteger('tag_id');
             $table->unsignedBigInteger('question_id');

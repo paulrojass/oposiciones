@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 
 use App\User;
 
+use Illuminate\Support\Str;
+
 //use Mail;
 
 use App\Mail\NewAdministrator;
@@ -42,6 +44,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'remember_token' => Str::random(10),
             'password' => bcrypt($password)
         ]);
 

@@ -22,7 +22,7 @@
                         <div class="form-row align-items-center">
                             <div class="col-auto">
                                 <label for="content" class="sr-only">Respuesta</label>
-                                <input type="text" maxlength="200" class="form-control @error('content') is-invalid @enderror" name="content" id="content" placeholder="respuesta" required autofocus>
+                                <input type="text" class="form-control @error('content') is-invalid @enderror" name="content" id="content" placeholder="respuesta" required autofocus>
                                 @error('content')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
