@@ -22,11 +22,12 @@ Auth::routes();
 Route::group(['middleware' => ['role:user']], function () {
     Route::get('crear-examen', 'TestController@createTest')->name('crear-examen')->middleware('auth');
     Route::post('new-test', 'TestController@newTest')->name('new-test');
-	Route::get('mi-perfil', 'UserController@myProfile')->name('mi-perfil');
+    Route::get('mi-perfil', 'UserController@myProfile')->name('mi-perfil');
     Route::get('test/{id}', 'TestController@testView')->name('examen');
     Route::post('save-test', 'TestController@saveTest')->name('save-test');
 });
-Route::post('ajax-search-tags-list', 'TagController@ajaxSearchTagsList');
+//Route::post('ajax-search-tags-list', 'TagController@ajaxSearchTagsList');
+Route::post('ajax-search-tags-list', 'SubcategoryController@ajaxSearchSubcategoriesList');
 Route::get('ajax-search-questions', 'TestController@searchQuestions');
 
 

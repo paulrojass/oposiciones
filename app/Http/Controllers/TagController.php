@@ -16,7 +16,7 @@ class TagController extends Controller
         $this->middleware('auth');
     }
 
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +40,6 @@ class TagController extends Controller
         $tag->subcategory_id = $request->subcategory_id;
         $tag->save();
         return redirect('subcategoria/'.$request->subcategory_id.'/etiquetas');
-
     }
 
     /**
@@ -87,7 +86,7 @@ class TagController extends Controller
     {
         $tag->name = $request->name;
         $tag->save();
-        return $tag; 
+        return $tag;
     }
 
     /**
@@ -120,7 +119,7 @@ class TagController extends Controller
     public function updateTag(Request $request)
     {
         //$this->validator($request->all())->validate();
-        
+
         $tag = Tag::find($request->id);
 
         $this->update($request, $tag);

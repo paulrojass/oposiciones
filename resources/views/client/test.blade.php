@@ -20,11 +20,10 @@
 						<div class="inner-title2">
 							<h3>Examen</h3>
 							<span>
-								<strong>Categoría:</strong> {{ $tags[0]->subcategory->category->name }} /
-								<strong>Subcategoría:</strong> {{ $tags[0]->subcategory->name }} 
+								<strong>Categoría:</strong> {{ $tags[0]->subcategory->category->name }}
 							</span>
 							<span>
-								<strong>Creado: </strong> {{ $test->created_at->diffForHumans() }} - 
+								<strong>Creado: </strong> {{ $test->created_at->diffForHumans() }} -
 								<strong>Actualizado: </strong>	{{ $test->updated_at->diffForHumans() }}
 							</span>
 							<span><strong>Cantidad de preguntas: </strong>{{ $questions->count() }}</span>
@@ -75,8 +74,8 @@
 									@endif
 									@foreach($answers2->shuffle() as $answer)
 
-										@php			
-											$marcada =	in_array($answer->id, $answers);									
+										@php
+											$marcada =	in_array($answer->id, $answers);
 										@endphp
 										<div class="mt-3">
 										<input type="radio" name="answer[{{ $iteracion }}]" id="{{ $answer->id }}" value="{{ $answer->id }}" @if($marcada) checked @endif><label for="{{ $answer->id }}">{{ $answer->content }}</label><br />
@@ -91,12 +90,12 @@
 			 	<div id="boton-modal" class="col-lg-12 column">
 					<div class="browse-all-cat mt-0">
 						<button class="examen-button m-4" type="button" data-toggle="modal" data-target="#modal-save-test" >Guardar progreso</button>
-					</div> 		
+					</div>
 			 	</div>
 			 	<div id="boton-finished" class="col-lg-12 column">
 					<div class="browse-all-cat mt-0">
 						<button class="examen-button m-4" type="submit" >finalizar</button>
-					</div> 		
+					</div>
 			 	</div>
 
 			</div>
@@ -118,7 +117,7 @@
 					<div class="browse-all-cat mt-0">
 						<button class="examen-button m-4" type="button" data-dismiss="modal" aria-label="Close">Continuar</button>
 						<button class="examen-button m-4" type="submit">Guardar y salir</button>
-					</div> 		
+					</div>
 			 	</div>
 			</div>
 		</div>
@@ -138,7 +137,7 @@
 
 	var cantidad = '{{ $questions->count() }}';
     var $checkboxes = $('input[type="radio"]');
-        
+
     $checkboxes.change(function(){
         var countCheckedCheckboxes = $checkboxes.filter(':checked').length;
         if(countCheckedCheckboxes == cantidad){
@@ -146,7 +145,7 @@
         	$('#boton-modal').hide();
         }else{
         	$('#boton-finished').hide();
-        	$('#boton-modal').show();        	
+        	$('#boton-modal').show();
         }
     });
 </script>

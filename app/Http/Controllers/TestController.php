@@ -43,10 +43,11 @@ class TestController extends Controller
 
     public function createTest()
     {
-
-        $subcategories = Subcategory::all();
-        if($subcategories->count() == 0) return back();
-        return view('client.crear-examen', compact('subcategories'));
+        $categories = Category::all();
+        if ($categories->count() == 0) {
+            return back();
+        }
+        return view('client.crear-examen', compact('categories'));
     }
 
     /**
@@ -86,7 +87,7 @@ class TestController extends Controller
         $answers = explode(",", $test->answers);
 
         //$answers = Answer::find($answers_array);
-        
+
         return view('client.test', compact('test', 'questions', 'answers'));
     }
 
@@ -142,7 +143,7 @@ class TestController extends Controller
             $parte = $tag->questions;
             $questions = $questions->merge($parte);
         }
-        return $questions; 
+        return $questions;
     }
 
     public function newTest(Request $request)
@@ -163,12 +164,12 @@ class TestController extends Controller
         $questions_string = implode(",", $questions_array);
 
         return $questions_string;
-
     }
 
-    public function answerString($number){
+    public function answerString($number)
+    {
         $answers = array();
-        for ($i=0; $i < $number; $i++) { 
+        for ($i=0; $i < $number; $i++) {
             array_push($answers, 0);
         }
         return implode(',', $answers);
@@ -213,7 +214,7 @@ class TestController extends Controller
     public function answersComplete(Request $request)
     {
         $answers = array();
-        for ($i = 0; $i < $request->value ; $i++) { 
+        for ($i = 0; $i < $request->value ; $i++) {
             if(array_key_exists($i+1, $request->answer))
             {
                 array_push($answers, $request->answer[$i+1]);

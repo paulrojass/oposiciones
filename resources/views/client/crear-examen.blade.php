@@ -13,28 +13,15 @@
 			 	<aside class="col-lg-6 column border-right">
 						@csrf
 	 					<div class="widget">
-	 						<span class="pf-title">Categorías y Subcategorías</span>
+	 						<span class="pf-title">Categorías</span>
 	 						<div class="pf-field">
 	 							<select data-placeholder="Por favor selecciona una subcategoría"
 	 									class="chosen"
-	 									id="select-subcategories"
+	 									id="select-categories"
 	 									name="subcategory">
-									<option value = "">Selecciona una subcategoría</option>
-									@php($categoria = "")
-									@foreach($subcategories as $subcategory)
-									@if($subcategory->category->name != $categoria)
-										@php($categoria = $subcategory->category->name)
-											@if(!$loop->first)
-												</optgroup>
-											@endif
-											<optgroup label="{{$categoria}}">
-												<option value="{{$subcategory->id}}">{{$subcategory->name}}</option>
-									@else
-										<option value="{{$subcategory->id}}">{{$subcategory->name}}</option>
-										@if($loop->last)
-											</optgroup>
-										@endif
-									@endif
+									<option value = "" selected>Selecciona una categoría</option>
+									@foreach ($categories as $category)
+										<option value="{{$category->id}}">{{$category->name}}</option>
 									@endforeach
 								</select>
 	 						</div>
@@ -53,63 +40,82 @@
 </section>
 @endsection
 
-
 @section('scripts')
-
 <script src="{{ asset('tema/js/jquery.scrollbar.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('tema/js/rslider.js') }}" type="text/javascript"></script>
-
-
-<script>	
+<script>
 $(function(){
 	$.ajaxSetup({
 	    headers: {
 	        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 	    }
-	});	
-	$('#select-subcategories').change(function(){
-		var subcategory_id = $(this).val();
-		var _token = $("input[name='_token']").val();
+	})
+
+	$('#select-categories').change(function(){
+		$('#questions-result').html('')
+
+		var category_id = $(this).val()
+		var _token = $("input[name='_token']").val()
 		$.ajax({
 			url: '/ajax-search-tags-list',
 			type: 'post',
-		/*
- 		contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
-		processData: false, // NEEDED, DON'T OMIT THIS
-		*/		
-			data: {subcategory_id: subcategory_id, _token: _token}
+			data: {category_id: category_id, _token: _token}
 		})
 		.done(function(response) {
-			$('#etiquetas').html(response);
+			$('#etiquetas').html(response)
 		})
 		.fail(function() {
-			console.log("error");
+			console.log("error")
 		})
 		.always(function() {
-			console.log("complete");
+			console.log("complete")
 		});
 	});
 
 	/*Busqueda en checkbox*/
-	$('#etiquetas').on('click', 'input:checkbox', function() {
-		searchQuestions();
+	$('#etiquetas').on('click', '.checkbox-tag', function() {
+		searchQuestions()
+		notChecked()
 	});
+
+	$('#etiquetas').on('click', '#all-checked', function() {
+		activeCheckboxes()
+		searchQuestions()
+	})
+
 });
 
 function searchQuestions(){
 	var tag = [];
 	$(".checkbox-tag:checked").each(function() {
-        tag.push($(this).val());
-    });
+        tag.push($(this).val())
+    })
 	$.ajax({
 		url:'/ajax-search-questions?tag='+JSON.stringify(tag),
 		type:'get',
 		success:function(response){
-			$('#questions-result').html('');
-			$('#questions-result').html(response);
+			$('#questions-result').html('')
+			$('#questions-result').html(response)
 		}
-	});
-
+	})
 }
+
+function activeCheckboxes(){
+	if ($('#all-checked').is(':checked')){
+		$('.checkbox-tag').prop('checked', true)
+	}else{
+		$('.checkbox-tag').prop('checked', false)
+	}
+}
+
+function notChecked(){
+	var numberNotChecked = $('.checkbox-tag:not(":checked")').length
+	if(numberNotChecked == 0){
+		$('#all-checked').prop('checked', true)
+	}else{
+		$('#all-checked').prop('checked', false)
+	}
+}
+
 </script>
 @endsection

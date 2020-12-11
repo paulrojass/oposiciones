@@ -83,7 +83,7 @@ class SubcategoryController extends Controller
     {
         $subcategory->name = $request->name;
         $subcategory->save();
-        return $subcategory; 
+        return $subcategory;
     }
 
     /**
@@ -100,9 +100,8 @@ class SubcategoryController extends Controller
     public function view($id)
     {
         $category = Category::find($id);
-
         $subcategories = Subcategory::where('category_id', $id)->orderBy('created_at', 'desc')->paginate(6);
-        return view('subcategories', compact('category','subcategories'));
+        return view('subcategories', compact('category', 'subcategories'));
     }
 
     public function delete($id)
@@ -110,7 +109,6 @@ class SubcategoryController extends Controller
         $subcategory = Subcategory::find($id);
         $this->destroy($subcategory);
         return redirect('categoria/'.$subcategory->category_id.'/subcategorias');
-
     }
 
     protected function validator(array $data)
@@ -124,7 +122,7 @@ class SubcategoryController extends Controller
     public function updateSubcategory(Request $request)
     {
         //$this->validator($request->all())->validate();
-        
+
         $subcategory = Subcategory::find($request->id);
 
         $this->update($request, $subcategory);
@@ -132,5 +130,9 @@ class SubcategoryController extends Controller
         return $this->view($subcategory->category->id);
     }
 
-
+    public function ajaxSearchSubcategoriesList(Request $request)
+    {
+        $subcategories = Subcategory::where('category_id', $request->category_id)->get();
+        return view('content.client-search-tags-list', compact('subcategories'));
+    }
 }
