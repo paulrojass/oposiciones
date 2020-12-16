@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 use App\User;
+use App\Category;
 
 use Illuminate\Support\Str;
 
@@ -20,16 +21,23 @@ class UserController extends Controller
 {
     public function myProfile()
     {
-    	$user = auth()->user();
+        $user = auth()->user();
 
-    	return view('client.panel-user-profile', compact('user'));
+        return view('client.panel-user-profile', compact('user'));
     }
 
     public function administrators()
     {
-        $administradores = User::whereHas("roles", function($q){ $q->where("name", "administrator"); })->paginate(20);
-    	$usuarios = User::whereHas("roles", function($q){ $q->where("name", "user"); })->paginate(20);
-    	return view('administradores', compact('administradores', 'usuarios'));
+        $administradores = User::whereHas("roles",
+            function($q) {
+                $q->where("name", "administrator");
+            })->paginate(20);
+    	$usuarios = User::whereHas("roles",
+            function($q){
+                    $q->where("name", "user");
+            })->paginate(20);
+        $categorias = Category::all();
+    	return view('administradores', compact('administradores', 'usuarios', 'categorias'));
     }
 
     public function createUser(Request $request)

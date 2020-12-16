@@ -20,7 +20,7 @@
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/colors/colors.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('tema/css/bootstrap.css')}}" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-	
+
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('css/estilos.css')}}" />
 
 	@yield('css')
@@ -45,7 +45,7 @@
 </div> -->
 		</div>
 	</div>
-	
+
 	<header class="@yield('header_type')">
 		<div class="menu-sec">
 			<div class="container">
@@ -54,20 +54,13 @@
 				</div><!-- Logo -->
 				@if(Auth::User())
 				@else
-				@if(Route::currentRouteName() != 'register')
-				<div class="btn-extars">
-					<ul class="account-btns">
-						<li class="signup-popup"><a href="{{url('register')}}" title=""><i class="la la-key"></i> Registrar</a></li>
-					</ul>
-				</div><!-- Btn Extras -->
-				@endif
-				@if(Route::currentRouteName() != 'login')
-				<div class="btn-extars">
-					<ul class="account-btns">
-						<li class="signup-popup"><a href="{{url('login')}}" title=""><i class="la la-key"></i> Login</a></li>
-					</ul>
-				</div><!-- Btn Extras -->
-				@endif
+					@if(Route::currentRouteName() != 'login')
+					<div class="btn-extars">
+						<ul class="account-btns">
+							<li class="signup-popup"><a href="{{url('login')}}" title=""><i class="la la-key"></i> Login</a></li>
+						</ul>
+					</div><!-- Btn Extras -->
+					@endif
 				@endif
 				<nav>
 				</nav><!-- Menus -->

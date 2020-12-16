@@ -12,7 +12,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    use HasRoles;    
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -44,5 +44,10 @@ class User extends Authenticatable
     public function tests()
     {
         return $this->hasMany(Test::class);
-    } 
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 }

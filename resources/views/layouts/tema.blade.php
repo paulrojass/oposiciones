@@ -23,7 +23,7 @@
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('tema/css/bootstrap.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{ URL::asset('tema/css/custom.css')}}" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-	
+
 </head>
 <body>
 
@@ -33,7 +33,7 @@
 </div>
 
 <div class="theme-layout" id="scrollup">
-	
+
 	<div class="responsive-header three">
 		<div class="responsive-menubar">
 			<div class="res-logo"><a href="{{ url('/') }}" title=""><img src="{{ asset('tema/images/logo.png') }}" alt="" /></a></div>
@@ -53,16 +53,16 @@
 					<li><a href="{{ route('mi-perfil') }}" title=""><i class="la la-user"></i>Mi cuenta</a></li>
 					<li><a href="{{ route('logout') }}" title=""><i class="la la-external-link-square"></i>Cerrar Sesión</a></li>
 				</ul>
-				@else					
+				@else
 				<ul class="account-btns">
 					<li class="signup-popup"><a title=""><i class="la la-key"></i> Registrarse</a></li>
 					<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Inciar Sessión</a></li>
 				</ul>
 				@endauth
-			</div><!-- Btn Extras -->			
+			</div><!-- Btn Extras -->
 		</div>
 	</div>
-	
+
 	<header class="@yield('header_type')">
 		<div class="menu-sec">
 			<div class="container">
@@ -80,9 +80,8 @@
 						<li><a href="{{ route('logout') }}" title=""><i class="la la-external-link-square"></i>Cerrar Sesión</a></li>
 
 					</ul>
-					@else						
+					@else
 					<ul class="account-btns">
-						<li class="signup-popup"><a title=""><i class="la la-key"></i>Registrarse</a></li>
 						<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i>Iniciar Sesión</a></li>
 					</ul>
 					@endauth
@@ -104,9 +103,9 @@
 
 
 	@yield('content')
-	
 
-	
+
+
 
 	<section>
 		<div>
@@ -161,43 +160,6 @@
 	</div>
 </div><!-- LOGIN POPUP -->
 
-
-<div class="account-popup-area signup-popup-box">
-	<div class="account-popup">
-		<span class="close-popup"><i class="la la-close"></i></span>
-		<h3>Registrarse</h3>
-		@error('email')
-			<span id="email-error"><strong>{{ $message }}</strong></span>
-		@enderror
-		<form method="POST" action="{{ route('register') }}">
-            @csrf
-			<div class="cfield">
-				<input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nombre" value="{{ old('name') }}" required />
-				<i class="la la-user"></i>
-			</div>
-			<div class="cfield">
-				<input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('E-Mail Address') }}" value="{{ old('email') }}" required />
-				<i class="la la-envelope"></i>
-			</div>
-
-			<div class="cfield">
-                <input id="password" placeholder="Contraseña" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" minlength="8"    >
-				<i class="la la-key"></i>
-			</div>
-			@error('password')
-			    <span>{{ $message }}</span>
-			@enderror
-
-			<div class="cfield">
-                <input type="password" placeholder="Repita la contraseña" name="password_confirmation" id="password_confirm" class="form-control @error('password') is-invalid @enderror" required autocomplete="current-password" minlength="8">
-				<i class="la la-key"></i>
-			</div>
-
-			<button type="submit">Crear Cuenta</button>
-		</form>
-	</div>
-</div><!-- REGISTRO POPUP <--></-->
-
 @yield('modals')
 
 <script src="{{ asset('tema/js/jquery.min.js')}}" type="text/javascript"></script>
@@ -215,4 +177,3 @@
 
 </body>
 </html>
-

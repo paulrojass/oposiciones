@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('landing');
 });
 
-Auth::routes();
+Auth::routes(["register" => false]);
 
 Route::group(['middleware' => ['role:user']], function () {
     Route::get('crear-examen', 'TestController@createTest')->name('crear-examen')->middleware('auth');
@@ -33,7 +33,7 @@ Route::get('ajax-search-questions', 'TestController@searchQuestions');
 
 //Rutas anteriores
 
-Route::group(['middleware' => ['role:administrator']], function(){
+Route::group(['middleware' => ['role:administrator']], function() {
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::get('categorias', 'CategoryController@view')->name('categorias');

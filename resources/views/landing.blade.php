@@ -21,7 +21,7 @@
 										<h3>Evalue sus conocimientos</br> con examenes online</br> para oposiciones</h3>
 										<span>Accede a nuestros examenes demo</br> gratuitamente de seguimiento a sus resultados.</span>
 										<a href="{{ url('crear-examen') }}" title="" class="btn-crear">Crear Examen</a>
-									</div>		
+									</div>
 								</div>
 							</div>
 						</div>
@@ -42,7 +42,7 @@
 				<div class="col-lg-12">
 					<div class="heading">
 						<h2>Garantiza tus resultados</h2>
-						
+
 					</div><!-- Heading -->
 					<div class="cat-sec">
 						<div class="row no-gape">
@@ -51,7 +51,7 @@
 									<a href="#" title="">
 										<i class="la la-bullhorn"></i>
 										<span>Test Personalizado</span>
-										
+
 									</a>
 								</div>
 							</div>
@@ -60,7 +60,7 @@
 									<a href="#" title="">
 										<i class="la la-graduation-cap"></i>
 										<span>Actualizaciones</span>
-										
+
 									</a>
 								</div>
 							</div>
@@ -69,7 +69,7 @@
 									<a href="#" title="">
 										<i class="la la-line-chart "></i>
 										<span>Historial de examenes</span>
-										
+
 									</a>
 								</div>
 							</div>
@@ -78,13 +78,13 @@
 									<a href="#" title="">
 										<i class="la la-users"></i>
 										<span>Multidispositivos</span>
-										
+
 									</a>
 								</div>
 							</div>
 						</div>
 					</div>
-					
+
 				</div>
 
 			</div>
@@ -101,11 +101,11 @@
 					<div class="simple-text-block">
 	<h3>¡La mejor técnica de estudio!</h3>
 <span>¡Haz la diferencia con nuestros examenes online demo!</span>
-						<a href="{{ route('register') }}" title="" class="rounded">Registrate</a>
+						<a href="" title="" class="rounded">Registrate</a>
 					</div>
 				</div>
 			</div>
-		</div>	
+		</div>
 	</div>
 </section>
 
@@ -118,7 +118,7 @@
 				<div class="col-lg-12">
 					<div class="heading">
 						<h2>Como funciona</h2>
-						
+
 					</div><!-- Heading -->
 					<div class="how-to-sec style2">
 						<div class="how-to">
@@ -136,7 +136,7 @@
 							<h3>Resuelve los test</h3>
 							<p>Soluciona tu examen y obten una calificacion.Tomate el tiempo que necesites</p>
 						</div>
-						
+
 					</div>
 				</div>
 			</div>
