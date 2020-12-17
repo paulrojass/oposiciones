@@ -16,6 +16,6 @@ class Category extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->hasMany(belongsToMany::class, 'categories_users', 'category_id', 'user_id');
     }
 }

@@ -21,7 +21,11 @@
 	 									name="subcategory">
 									<option value = "" selected>Selecciona una categoría</option>
 									@foreach ($categories as $category)
-										<option value="{{$category->id}}">{{$category->name}}</option>
+										@foreach (auth()->user()->categories as $userCategory)
+											@if($userCategory->id == $category->id)
+												<option value="{{$category->id}}">{{$category->name}}</option>
+											@endif
+										@endforeach
 									@endforeach
 								</select>
 	 						</div>

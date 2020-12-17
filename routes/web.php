@@ -65,7 +65,9 @@ Route::group(['middleware' => ['role:administrator']], function() {
     Route::post('agregar-etiqueta-pregunta', 'QuestionController@createTag')->name('agregar-etiqueta-pregunta');
 
     Route::get('usuarios', 'UserController@administrators')->name('administrators');
-    Route::post('crear_usuario', 'UserController@createUser')->name('crear-usuario');
+    Route::post('crear-administrador', 'UserController@createAdministrator')->name('crear-administrador');
+    Route::post('crear-usuario', 'UserController@createUser')->name('crear-usuario');
+    Route::get('eliminar-usuario/{id}', 'UserController@delete')->name('eliminar-usuario');
 
     Route::get('test-list/{id}', 'TestController@adminView')->name('test-list');
 

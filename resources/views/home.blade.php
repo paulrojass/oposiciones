@@ -20,8 +20,8 @@
 
                 <div class="links">
                     <ul>
-                        <li><a href="{{ route('categorias') }}">Administrar Categorías</a></li>
-                        <li><a href="{{ route('preguntas') }}">Administrar Preguntas</a></li>
+                        <li><a href="{{ route('categorias') }}">Categorías</a></li>
+                        <li><a href="{{ route('preguntas') }}">Preguntas</a></li>
                         @if(@Auth::user()->hasPermissionTo('crear_usuarios'))
                         <li>
                             <a href="{{ route('administrators') }}">Usuarios</a>
