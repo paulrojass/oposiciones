@@ -30,7 +30,7 @@
 						<ul class="list-group list-group-flush">
 						  <li class="list-group-item"><h4>{{ $category->name }}</h4>
 							@if($category->subcategories->count()>0)
-							@foreach ($category->subcategories as $subcategory) 
+							@foreach ($category->subcategories as $subcategory)
 							<dl class="row">
 								<dt class="col-sm-3">{{ $subcategory->name }}</dt>
 								<dd class="col-sm-9">
@@ -38,7 +38,7 @@
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox" name="tag[{{$tag->id}}]" id="tag[{{$tag->id}}]" value="{{$tag->id}}">
 										<label class="form-check-label" for="tag{{$tag->id}}">{{$tag->name}}</label>
-									</div>                        
+									</div>
 									@endforeach
 								</dd>
 							</dl>
@@ -56,7 +56,7 @@
 							</div>
 						</div>
 					</form>
-				</div>               
+				</div>
 			</div>
 		</div>
 		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 buscador">
@@ -125,7 +125,7 @@
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                        @enderror							
+                        @enderror
 					</div>
 				</div>
 				<div class="modal-footer">

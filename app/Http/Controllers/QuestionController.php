@@ -94,7 +94,7 @@ class QuestionController extends Controller
     {
         $question->content = $request->content;
         $question->save();
-        return $question; 
+        return $question;
     }
 
     /**
@@ -110,14 +110,13 @@ class QuestionController extends Controller
 
     public function view(Request $request)
     {
-       if ($request)
-        {
+        if ($request) {
             $query=trim($request->get('searchText'));
             $questions=Question::where('content','LIKE','%'.$query.'%')->orderBy('created_at', 'desc')->paginate(100);
             $categories = Category::all();
             return view('questions', compact('questions', 'categories', 'query'));
         }
-        
+
     }
 
     public function delete($id)
@@ -133,10 +132,10 @@ class QuestionController extends Controller
 
        //$tags = DB::table('question_tags')->select('*')->where('question_id', $question->id)->get();
         $tags = $question->tags;
-        
+
         $categories = Category::all();
-    
-       
+
+
 
         return view('question-tags', compact('question', 'categories', 'tags'));
     }
@@ -154,7 +153,7 @@ class QuestionController extends Controller
     {
 
         //$this->validator($request->all())->validate();
-        
+
         $question = Question::find($request->id);
 
         $this->update($request, $question);

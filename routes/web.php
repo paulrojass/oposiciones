@@ -67,6 +67,7 @@ Route::group(['middleware' => ['role:administrator']], function() {
     Route::get('usuarios', 'UserController@administrators')->name('administrators');
     Route::post('crear-administrador', 'UserController@createAdministrator')->name('crear-administrador');
     Route::post('crear-usuario', 'UserController@createUser')->name('crear-usuario');
+    Route::post('actualizar-usuario', 'UserController@update')->name('actualizar-usuario');
     Route::get('eliminar-usuario/{id}', 'UserController@delete')->name('eliminar-usuario');
 
     Route::get('test-list/{id}', 'TestController@adminView')->name('test-list');

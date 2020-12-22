@@ -49,6 +49,7 @@
                             </div>
                         </div>
                     </div>
+                    @include('search')
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -71,7 +72,12 @@
                                 @endforeach
                                 </td>
                                 <td>
-            						{{--<a href="javascript:void(0)" data-toggle="modal" data-target="#exampleModal" data-content="{{ $user->id }}" data-id="{{ $user->id }}" >editar</a> |--}}
+            						<a href="" data-toggle="modal" data-target="#exampleModal"
+                                    data-id="{{ $user->id }}"
+                                    data-name="{{ $user->name }}"
+                                    data-categories="{{ $user->categories->pluck('id')}}"
+                                    >editar</a>
+                                    |
             						<a href="{{ route('eliminar-usuario', $user->id) }}" onclick="return confirm('¿Desea eleminar el usuario?')">eliminar</a>
             					</td>
                             </tr>
@@ -137,4 +143,63 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form method="POST" action="{{ route('actualizar-usuario') }}">
+				<div class="modal-body">
+					@csrf
+					<input type="hidden" id="id" name="id">
+					<div class="form-group">
+						<label for="content">Nombre</label>
+                        <input type="text" name="name" id="name">
+					</div>
+                    <p>Seleccione las categorias que asignará al usuario:</p>
+                    @foreach ($categorias as $categoria)
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="modal-categories[{{$categoria->id}}]" name="categories[{{$categoria->id}}]" value="{{$categoria->id}}"
+                            >
+                            <label class="form-check-label" for="modal-categories[{{$categoria->id}}]">{{$categoria->name}}</label>
+                        </div>
+                    @endforeach
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">cancelar</button>
+					<button type="submit" class="btn btn-primary">actualizar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+@endsection
+
+@section('scripts')
+<script>
+    window.onload = function() {
+        $('#content').focus();
+
+		$('#exampleModal').on('show.bs.modal', function (event) {
+			var a = $(event.relatedTarget) // Button that triggered the modal
+			var recipient = a.data('id') // Extract info from data-* attributes
+			var name = a.data('name') // Extract info from data-* attributes
+            var categories = a.data('categories')
+            console.log(categories)
+			var modal = $(this)
+            modal.find("input:checkbox").attr("checked", false)
+		    modal.find('#name').val(name)
+			modal.find('#id').val(recipient)
+            categories.forEach(element => modal.find("input:checkbox[value='"+element+"']").attr("checked", true))
+		})
+    };
+</script>
 @endsection
