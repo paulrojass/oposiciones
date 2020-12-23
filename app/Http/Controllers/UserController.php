@@ -29,6 +29,47 @@ class UserController extends Controller
         return view('client.panel-user-profile', compact('user'));
     }
 
+    public function edit()
+    {
+        $user = auth()->user();
+        return view('client.panel-user-edit', compact('user'));
+    }
+
+    public function updateUser(Request $request)
+    {
+        $user = User::find($request->id);
+
+        if ($user->email == $request->email) {
+            $this->validate($request, [
+                'name' => ['required']
+            ]);
+        } else {
+            $this->validate($request, [
+                'name' => ['required'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users']
+            ]);
+            $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+            $password = substr(str_shuffle($permitted_chars), 0, 8);
+            $user->email = $request->email;
+            $user->password = bcrypt($password);
+            Mail::to($user->email)->send(new NewAdministrator($user, $password));
+        }
+        $user->name = $request->name;
+        $user->save();
+        return back();
+    }
+
+    public function updateUserPassword(Request $request)
+    {
+        $this->validatorPass($request->all())->validate();
+        $user = User::find($request->id);
+        $password = $request->password;
+        $user->password = bcrypt($password);
+        $user->save();
+        Mail::to($user->email)->send(new NewAdministrator($user, $password));
+        return back();
+    }
+
     public function administrators(Request $request)
     {
             $administradores = User::whereHas(
@@ -46,10 +87,10 @@ class UserController extends Controller
             )->paginate(20);
 
             if ($request) {
-            $query=trim($request->get('searchText'));
-            $usuarios=User::whereHas(
-                "roles",
-                function ($q) {
+                $query=trim($request->get('searchText'));
+                $usuarios=User::whereHas(
+                    "roles",
+                    function ($q) {
                     $q->where("name", "user");
                 })
                 ->where('name', 'LIKE', '%'.$query.'%')
@@ -168,6 +209,19 @@ class UserController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        ]);
+    }
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validatorPass(array $data)
+    {
+        return Validator::make($data, [
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 }

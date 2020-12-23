@@ -7,7 +7,7 @@
 @section('content')
 <section class="overlape">
 	<div class="block no-padding">
-		<div data-velocity="-.1" style="background: url(http://placehold.it/1600x800) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
+		<div data-velocity="-.1" style="background: url({{asset('tema/images/back.jpg')}}) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
 		<div class="container fluid">
 			<div class="row">
 				<div class="col-lg-12">
@@ -31,21 +31,20 @@
 		 						<div class="job-single-head3 emplye">
 					 				<div class="job-single-info3">
 					 					<h3>{{ $user->name }}</h3>
+
 					 					<span><i class="la la-envelope"></i>{{ $user->email }}</span>
-					 					
 
-
-					<!-- <a data-toggle="modal" data-target="#modal-edit-profile" title=""><span class="job-is ft">Cambiar nombre</span></a> -->
+										<a  href="{{route('usuario-editar')}}"><span class="job-is ft">Editar Usuario</span></a>
 
 										@if(auth()->user()->tests)
 					 					<ul class="tags-jobs">
-						 					<li><i class="la la-file-text"></i>{{ auth()->user()->tests->count() }} Examenes Creados</li>
-						 					<li><i class="la la-file-text"></i>{{ auth()->user()->tests->where('finished', 1)->count() }} Examenes Finalizados</li>
-						 					<li><i class="la la-file-text"></i>{{ auth()->user()->tests->where('finished', 0)->count() }} Examenes Pendientes</li>
+						 					<li><i class="la la-file-text"></i>{{ auth()->user()->tests->count() }} Test Creados</li>
+						 					<li><i class="la la-file-text"></i>{{ auth()->user()->tests->where('finished', 1)->count() }} Test Finalizados</li>
+						 					<li><i class="la la-file-text"></i>{{ auth()->user()->tests->where('finished', 0)->count() }} Test Pendientes</li>
 						 				</ul>
 						 				@else
 					 					<ul class="tags-jobs">
-						 					<li><i class="la la-file-text"></i>Todavía no ha creado examenes</li>
+						 					<li><i class="la la-file-text"></i>Todavía no ha creado Test</li>
 						 				</ul>
 						 				@endif
 					 				</div>
@@ -57,7 +56,7 @@
 						 	<div class="row">
 						 		<div class="recent-jobs">
 						 			@if(auth()->user()->tests)
-					 				<h3 class="text-center">Exámenes</h3>
+					 				<h3 class="text-center">Lista de Test</h3>
 					 				<div class="job-list-modern">
 									 	<div class="job-listings-sec no-border">
 											@foreach($user->tests->sortByDesc('created_at') as $test)
@@ -85,7 +84,7 @@
 													@else
 													<span class="job-is ft ">Pendiente</span>
 													@endif
-													
+
 													<i>Actualizado {{ $test->updated_at->diffForHumans() }}</i>
 												</div>
 											</div>
@@ -94,7 +93,7 @@
 									</div>
 									@else
 										<div class="browse-all-cat">
-										<a href="{{ route('crear-examen') }}">Crear Examen</a>
+										<a href="{{ route('crear-examen') }}">Crear Test</a>
 										</div>
 									@endif
 					 			</div>
@@ -122,13 +121,13 @@
 					<div class="col-lg-12">
 						<form id="form-information-pdf-edit" class="pl-1">
 							@csrf
-							<span class="pf-title">Nombre</span>									
+							<span class="pf-title">Nombre</span>
 							<div class="pf-field">
 								<input type="text" name="name_pdf_edit" id="name_pdf_edit" maxlength="50" required>
 								<span class="form-error" id="e_name_pdf" hidden> Debe agregar una cantidad válida</span>
 							</div>
 							<input type="hidden" id="talento_id_pdf_edit" name="talento_id_pdf_edit">
-							<span class="pf-title">Descripción</span>									
+							<span class="pf-title">Descripción</span>
 							<div class="pf-field">
 								<textarea id="description-pdf-edit" name="description-pdf-edit" required></textarea>
 							</div>

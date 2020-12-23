@@ -6,10 +6,11 @@
     <title>Llamado de emergencia</title>
 </head>
 <body>
-    <p>¡Hola! estas son las credenciales para su acceso administrador a Meforma.com:</p>
+    <p>Bienvenido a la versión beta de la plataforma de Test interactiva del Grupo Meforma, para acceder a ella por favor inicia sesión con el siguiente usuario y contraseña:</p>
     <ul>
-        <li>correo eletrónico: {{ $user->email }}</li>
+        <li>usuario: {{ $user->email }}</li>
         <li>contraseña: {{ $password }}</li>
     </ul>
+    <p>Para cualquier sugerencia o duda contáctanos en contacto@grupomeforma.com</p>
 </body>
 </html>

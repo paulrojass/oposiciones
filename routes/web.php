@@ -25,14 +25,15 @@ Route::group(['middleware' => ['role:user']], function () {
     Route::get('mi-perfil', 'UserController@myProfile')->name('mi-perfil');
     Route::get('test/{id}', 'TestController@testView')->name('examen');
     Route::post('save-test', 'TestController@saveTest')->name('save-test');
+    Route::get('editar-usuario', 'UserController@edit')->name('usuario-editar');
+    Route::post('actualizar-usuario-panel', 'UserController@updateUser')->name('user-update');
+    Route::post('actualizar-usuario-password-panel', 'UserController@updateUserPassword')->name('user-update-password');
 });
 //Route::post('ajax-search-tags-list', 'TagController@ajaxSearchTagsList');
 Route::post('ajax-search-tags-list', 'SubcategoryController@ajaxSearchSubcategoriesList');
 Route::get('ajax-search-questions', 'TestController@searchQuestions');
 
-
 //Rutas anteriores
-
 Route::group(['middleware' => ['role:administrator']], function() {
     Route::get('/home', 'HomeController@index')->name('home');
 

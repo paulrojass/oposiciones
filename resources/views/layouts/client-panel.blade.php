@@ -22,7 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ URL::asset('tema/css/custom.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('tema/css/bootstrap.css')}}" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-	
+
 </head>
 <body>
 
@@ -32,7 +32,7 @@
 </div>
 
 <div class="theme-layout" id="scrollup">
-	
+
 	<div class="responsive-header three">
 		<div class="responsive-menubar">
 			<div class="res-logo"><a href="{{ url('/') }}" title=""><img src="{{ asset('tema/images/logo.png') }}" alt="" /></a></div>
@@ -52,7 +52,7 @@
 					<li><a title=""><i class="la la-user"></i>Mi cuenta</a></li>
 					<li><a href="{{ route('logout') }}" title=""><i class="la la-external-link-square"></i>Cerrar Sesión</a></li>
 				</ul>
-				@else					
+				@else
 				<ul class="account-btns">
 					<li class="signup-popup"><a title=""><i class="la la-key"></i> Registrarse</a></li>
 					<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Inciar Sessión</a></li>
@@ -63,10 +63,10 @@
 				<input type="text" placeholder="Job title, keywords or company name" />
 				<button type="submit"><i class="la la-search"></i></button>
 			</form>
-			
+
 		</div>
 	</div>
-	
+
 	<header class="stick-top style3">
 		<div class="menu-sec">
 			<div class="container">
@@ -80,7 +80,7 @@
 						<li><a href="{{ route('logout') }}" title=""><i class="la la-external-link-square"></i>Cerrar Sesión</a></li>
 
 					</ul>
-					@else						
+					@else
 					<ul class="account-btns">
 						<li class="signup-popup"><a title=""><i class="la la-key"></i>Registrarse</a></li>
 						<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i>Iniciar Sesión</a></li>
@@ -90,7 +90,7 @@
 				<nav>
 					<ul>
 						<li class="menu-item">
-							<a href="{{url('crear-examen')}}" title="" style="color: #fff">Crear Examen</a>
+							<a href="{{url('crear-examen')}}" title="" style="color: #fff">Crear Test</a>
 						</li>
 					</ul>
 				</nav><!-- Menus -->
@@ -100,9 +100,9 @@
 
 
 	@yield('content')
-	
 
-	
+
+
 
 	<section>
 		<div>

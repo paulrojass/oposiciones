@@ -18,9 +18,9 @@
 							<div class="row">
 								<div class="col-lg-8">
 									<div class="find-cand">
-										<h3>Evalue sus conocimientos</br> con examenes online</br> para oposiciones</h3>
-										<span>Accede a nuestros examenes demo</br> gratuitamente de seguimiento a sus resultados.</span>
-										<a href="{{ url('crear-examen') }}" title="" class="btn-crear">Crear Examen</a>
+										<h3>Evalue sus conocimientos</br> con test online</br> para oposiciones</h3>
+										<span>Accede a nuestros test demo</br> gratuitamente de seguimiento a sus resultados.</span>
+										<a href="{{ url('crear-examen') }}" title="" class="btn-crear">Crear Test</a>
 									</div>
 								</div>
 							</div>
@@ -68,7 +68,7 @@
 								<div class="p-category green">
 									<a href="#" title="">
 										<i class="la la-line-chart "></i>
-										<span>Historial de examenes</span>
+										<span>Historial de test</span>
 
 									</a>
 								</div>
@@ -78,15 +78,12 @@
 									<a href="#" title="">
 										<i class="la la-users"></i>
 										<span>Multidispositivos</span>
-
 									</a>
 								</div>
 							</div>
 						</div>
 					</div>
-
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -100,7 +97,7 @@
 				<div class="col-lg-12">
 					<div class="simple-text-block">
 	<h3>¡La mejor técnica de estudio!</h3>
-<span>¡Haz la diferencia con nuestros examenes online demo!</span>
+<span>¡Haz la diferencia con nuestros test online demo!</span>
 						<a href="" title="" class="rounded">Registrate</a>
 					</div>
 				</div>
@@ -129,14 +126,13 @@
 						<div class="how-to">
 							<span class="how-icon"><i class="la la-file-archive-o"></i></span>
 							<h3>Crea test personalizados</h3>
-							<p>Crea tu examen con nuestro creador de examenes personalizado utilizando los parametros que desees.</p>
+							<p>Crea tu examen con nuestro creador de test personalizado utilizando los parametros que desees.</p>
 						</div>
 						<div class="how-to">
 							<span class="how-icon"><i class="la la-file-archive-o"></i></span>
 							<h3>Resuelve los test</h3>
-							<p>Soluciona tu examen y obten una calificacion.Tomate el tiempo que necesites</p>
+							<p>Soluciona tu test y obten una calificacion.Tomate el tiempo que necesites</p>
 						</div>
-
 					</div>
 				</div>
 			</div>

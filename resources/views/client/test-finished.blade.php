@@ -1,6 +1,6 @@
 @extends('layouts.tema')
 
-@section('title', 'Resultado de examen')
+@section('title', 'Resultado del test')
 
 @section('header_type', 'stick-top')
 
@@ -12,7 +12,7 @@
 				<div class="col-lg-12">
 					<div class="main-featured-sec">
 						<div class="new-slide">
-							<img src="http://placehold.it/1920x800" alt="" />
+							<img src="{{asset('tema/images/back.jpg')}}" alt="" />
 						</div>
 						<div class="job-search-sec">
 							<div class="job-search">

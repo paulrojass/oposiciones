@@ -6,8 +6,8 @@
 				<div class="simple-text-block">
 					<h3 style="color:#202020">{{$questions->count()}} preguntas relacionadas</h3>
 					<span style="color:#202020" class=" ml-4 mr-4">
-					Existe la cantidad de preguntas necesarias para realizar un exámen,<br/> Puede comenzar un examen seleccionando la cantidad deseada de preguntas y haciendo clic en el siguiente enlace<br/>
-					<strong>Nota:</strong> Al hacer clic en el enlace se creará un examen en su cuenta.
+					Existe la cantidad de preguntas necesarias para realizar un test,<br/> Puede comenzar uno seleccionando la cantidad deseada de preguntas y haciendo clic en el siguiente enlace<br/>
+					<strong>Nota:</strong> Al hacer clic en el enlace se creará un test en su cuenta.
 				</span>
 				</div>
 			</div>
@@ -18,10 +18,10 @@
 					<input class="small-input" type="number" min="10" max="{{ $questions->count() }}" name="number" id="number" value="10">
 				</div>
 			</div>
-				
+
 
 			<div class="browse-all-cat mt-0">
-				<button class="examen-button" type="submit">Comenzar Examen</button>
+				<button class="examen-button" type="submit">Comenzar Test</button>
 			</div>
 
 			@else

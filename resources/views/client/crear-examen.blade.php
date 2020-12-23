@@ -1,6 +1,6 @@
 @extends('layouts.tema')
 
-@section('title', 'Crear Examen')
+@section('title', 'Crear Test')
 
 @section('header_type', 'gradient')
 

@@ -18,17 +18,17 @@
 							<div class="job-search-sec ">
 								<div class="job-search ">
 									<h3>{{ $questions->count() }} Preguntas encontradas</h3>
-									<span>La busqueda arrojó la cantidad de preguntas necesarias para un examen, si desea comenzarlo haga clic en el siguiente enlace</span>
+									<span>La busqueda arrojó la cantidad de preguntas necesarias para un test, si desea comenzarlo haga clic en el siguiente enlace</span>
 								</div>
 								<div class="simple-text-block">
-									<a href="{{ route('examen', ['questions' => $questions]) }}" title="">Iniciar Examen</a>
+									<a href="{{ route('examen', ['questions' => $questions]) }}" title="">Iniciar Test/a>
 								</div>
 							</div>
 							@else
 							<div class="job-search-sec ">
 								<div class="job-search ">
 									<h3>Busqueda sin resultados</h3>
-									<span>Las etiquetas seleccionadas no tienen una cantidad de preguntas necesarias para realizar un examen por favor intente con otra búsqueda</span>
+									<span>Las etiquetas seleccionadas no tienen una cantidad de preguntas necesarias para realizar un test por favor intente con otra búsqueda</span>
 								</div>
 								<div class="simple-text-block">
 									<a href="{{ route('crear-examen') }}" title="">Volver a buscar</a>
@@ -45,7 +45,7 @@
 
 
 @section('scripts')
-<script>	
+<script>
 	$('#select-subcategories').change(function(){
 		alert('cambio')
 		var subcategory_id = 1
@@ -63,7 +63,7 @@
 		.always(function() {
 			console.log("complete");
 		});
-		
+
 	});
 $(function(){
 

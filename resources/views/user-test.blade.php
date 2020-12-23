@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'Listado de examenes de '.$user->name)
+@section('title', 'Listado de test de '.$user->name)
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Listado de examenes de <strong>{{ $user->name }}</strong>
+                <div class="card-header">Listado de test de <strong>{{ $user->name }}</strong>
                     <a class="float-right" href="{{ route('administrators') }}">volver a usuarios</a>
-                </div>
+                </div>examen
                 <table class="table table-striped">
                     <thead>
                         <tr>

@@ -1,6 +1,6 @@
 @extends('layouts.tema')
 
-@section('title', 'Examen')
+@section('title', 'Test')
 
 @section('header_type', 'gradient')
 
@@ -18,7 +18,7 @@
 				<div class="col-lg-12">
 					<div class="inner2">
 						<div class="inner-title2">
-							<h3>Examen</h3>
+							<h3>Test</h3>
 							<span>
 								<strong>Categoría:</strong> {{ $tags[0]->subcategory->category->name }}
 							</span>
@@ -111,7 +111,7 @@
 			</button>
 			<div class="modal-body text-center">
 				<input type="hidden" id="m-eliminar-talento">
-				<p>Todavía no ha finalizado el examen, ¿desea contiuar o guardar y salir?</p>
+				<p>Todavía no ha finalizado el test, ¿desea contiuar o guardar y salir?</p>
 
 			 	<div class="col-lg-12 column">
 					<div class="browse-all-cat mt-0">
