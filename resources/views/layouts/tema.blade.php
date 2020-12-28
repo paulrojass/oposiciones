@@ -60,6 +60,17 @@
 				</ul>
 				@endauth
 			</div><!-- Btn Extras -->
+			@auth
+			@if (auth()->user()->hasRole('user'))
+			<nav>
+				<ul>
+					<li class="menu-item">
+						<a href="{{url('crear-examen')}}" title="" style="color: #fff">Crear Test</a>
+					</li>
+				</ul>
+			</nav><!-- Menus -->
+			@endif
+			@endauth
 		</div>
 	</div>
 
@@ -67,7 +78,11 @@
 		<div class="menu-sec">
 			<div class="container">
 				<div class="logo">
+					@if(request()->is('/'))
 					<a href="{{ url('/') }}" title=""><img src="{{ asset('tema/images/logo.png') }}" alt="" /></a>
+					@else
+					<a href="{{ url('/') }}" title=""><img src="{{ asset('tema/images/logo-white.png') }}" alt="" /></a>
+					@endif
 				</div><!-- Logo -->
 				<div class="btn-extars">
 					@auth

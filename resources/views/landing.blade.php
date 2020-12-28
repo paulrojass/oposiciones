@@ -18,9 +18,9 @@
 							<div class="row">
 								<div class="col-lg-8">
 									<div class="find-cand">
-										<h3>Evalue sus conocimientos</br> con test online</br> para oposiciones</h3>
-										<span>Accede a nuestros test demo</br> gratuitamente de seguimiento a sus resultados.</span>
-										<a href="{{ url('crear-examen') }}" title="" class="btn-crear">Crear Test</a>
+										<h3>Evalúa tus conocimientos</br> con test online</br> para oposiciones</h3>
+										<span>Accede a nuestros test demo</br> gratuitamente de seguimiento a tus resultados.</span>
+										<a href="{{ url('crear-examen') }}" title="" class="btn-crear">Crea Test</a>
 									</div>
 								</div>
 							</div>
@@ -121,18 +121,36 @@
 						<div class="how-to">
 							<span class="how-icon"><i class="la la-user"></i></span>
 							<h3>Registra tu usuario</h3>
-							<p>Crea un nuevo usuaro con tu correo electronico y accede a todas nuestras herramientas.</p>
+							<p>Crea un nuevo usuaro con tu correo electrónico y accede a todas nuestras herramientas.</p>
 						</div>
 						<div class="how-to">
 							<span class="how-icon"><i class="la la-file-archive-o"></i></span>
 							<h3>Crea test personalizados</h3>
-							<p>Crea tu examen con nuestro creador de test personalizado utilizando los parametros que desees.</p>
+							<p>Crea tu test con nuestro creador personalizado utilizando los parámetros que desees.</p>
 						</div>
 						<div class="how-to">
 							<span class="how-icon"><i class="la la-file-archive-o"></i></span>
 							<h3>Resuelve los test</h3>
-							<p>Soluciona tu test y obten una calificacion.Tomate el tiempo que necesites</p>
+							<p>Soluciona tu test y obtén una calificación.Tómate el tiempo que necesites</p>
 						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section>
+	<div class="block">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading">
+						<h2>Grupo Meforma</h2>
+						<span>Premios a la excelencia educativa.</span>
+					</div><!-- Heading -->
+					<div class="comp-sec">
+						<img style="width:100%" src="{{asset('tema/images/premios.png')}}" alt="" />
 					</div>
 				</div>
 			</div>
