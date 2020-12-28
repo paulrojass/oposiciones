@@ -55,17 +55,16 @@
 				</ul>
 				@else
 				<ul class="account-btns">
-					<li class="signup-popup"><a title=""><i class="la la-key"></i> Registrarse</a></li>
-					<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Inciar Sessión</a></li>
+					<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Incia Sessión</a></li>
 				</ul>
 				@endauth
 			</div><!-- Btn Extras -->
 			@auth
-			@if (auth()->user()->hasRole('user'))
+			@if (auth()->user()->hasRole('user') && !Request::is('crear-examen'))
 			<nav>
 				<ul>
 					<li class="menu-item">
-						<a href="{{url('crear-examen')}}" title="" style="color: #fff">Crear Test</a>
+						<a href="{{url('crear-examen')}}" title="" class="btn-crear">Crea Test</a>
 					</li>
 				</ul>
 			</nav><!-- Menus -->
@@ -78,7 +77,9 @@
 		<div class="menu-sec">
 			<div class="container">
 				<div class="logo">
-					@if(request()->is('/'))
+					{{--@if(request()->is('/'))--}}
+
+					@if(url()->current() == route('landing'))
 					<a href="{{ url('/') }}" title=""><img src="{{ asset('tema/images/logo.png') }}" alt="" /></a>
 					@else
 					<a href="{{ url('/') }}" title=""><img src="{{ asset('tema/images/logo-white.png') }}" alt="" /></a>
@@ -97,16 +98,16 @@
 					</ul>
 					@else
 					<ul class="account-btns">
-						<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i>Iniciar Sesión</a></li>
+						<li class="signin-popup"><a title=""><i class="la la-external-link-square"></i>Inicia Sesión</a></li>
 					</ul>
 					@endauth
 				</div><!-- Btn Extras -->
 				@auth
-				@if (auth()->user()->hasRole('user'))
+				@if (auth()->user()->hasRole('user') && !Request::is('crear-examen'))
 				<nav>
 					<ul>
 						<li class="menu-item">
-							<a href="{{url('crear-examen')}}" title="" style="color: #fff">Crear Test</a>
+							<a href="{{url('crear-examen')}}" title=""  class="btn-crear">Crea Test</a>
 						</li>
 					</ul>
 				</nav><!-- Menus -->

@@ -18,9 +18,13 @@
 							<div class="row">
 								<div class="col-lg-8">
 									<div class="find-cand">
-										<h3>Evalúa tus conocimientos</br> con test online</br> para oposiciones</h3>
-										<span>Accede a nuestros test demo</br> gratuitamente de seguimiento a tus resultados.</span>
+										<h3>Test Online para </br> Oposiciones</h3>
+										<span>Mide los resultados y avances en tu Oposición.</span>
+										@auth
 										<a href="{{ url('crear-examen') }}" title="" class="btn-crear">Crea Test</a>
+										@else
+										<a href="{{ url('crear-examen') }}" title="" class="btn-crear">Inicia Sesión</a>
+										@endauth
 									</div>
 								</div>
 							</div>
@@ -50,7 +54,7 @@
 								<div class="p-category green">
 									<a href="#" title="">
 										<i class="la la-bullhorn"></i>
-										<span>Test Personalizado</span>
+										<span>Test Personalizados</span>
 
 									</a>
 								</div>
@@ -98,7 +102,11 @@
 					<div class="simple-text-block">
 	<h3>¡La mejor técnica de estudio!</h3>
 <span>¡Haz la diferencia con nuestros test online demo!</span>
-						<a href="" title="" class="rounded">Registrate</a>
+						@auth
+						<a href="{{ url('crear-examen') }}" title="" class="rounded">Crea Test</a>
+						@else
+						<a href="{{ url('crear-examen') }}" title="" class="rounded">Inicia Sesión</a>
+						@endauth
 					</div>
 				</div>
 			</div>
@@ -107,7 +115,7 @@
 </section>
 
 
-
+{{--
 <section>
 	<div class="block remove-top">
 		<div class="container">
@@ -139,7 +147,7 @@
 		</div>
 	</div>
 </section>
-
+--}}
 <section>
 	<div class="block">
 		<div class="container">

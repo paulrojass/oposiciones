@@ -2,28 +2,13 @@
 
 @section('title', 'Editar mi cuenta')
 
-@section('header_type', 'stick-top style3')
+@section('header_type', 'gradient')
 
 @section('content')
-<section class="overlape">
-	<div class="block no-padding">
-		<div data-velocity="-.1" style="background: url({{asset('tema/images/back.jpg')}}) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
-		<div class="container fluid">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="inner-header">
-						<h3>Editar mi cuenta</h3>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<section>
 	<div class="block">
 		<div class="container">
 			<div class="row">
-		 		<div class="col-lg-12 column">
+		 		<div class="col-lg-6 column">
 			 		<div class="padding-left">
 				 		<div class="manage-jobs-sec">
 							<h3>Cambiar Datos</h3>
@@ -31,7 +16,7 @@
 					 			<form action="{{ route('user-update') }}" method="POST">
 									@csrf
 					 				<div class="row">
-					 					<div class="col-lg-9">
+					 					<div class="col-lg-8">
 											<input type="hidden" name="id" value="{{$user->id}}">
 					 						<span class="pf-title">Nombre</span>
 					 						<div class="pf-field">
@@ -45,16 +30,13 @@
 												<button class="examen-button ml-2" type="submit">Actualizar</button>
 											</div>
 					 					</div>
-					 					<div class="col-lg-3">
-					 						<i class="la la-user big-icon"></i>
-					 					</div>
 					 				</div>
 					 			</form>
 					 		</div>
 				 		</div>
 					</div>
 				</div>
-				<div class="col-lg-12 column">
+				<div class="col-lg-6 column">
 			 		<div class="padding-left">
 				 		<div class="manage-jobs-sec">
 							<h3>Cambiar Contraseña</h3>
@@ -62,7 +44,7 @@
 					 			<form action="{{route('user-update-password')}}" method="post">
 									@csrf
 					 				<div class="row">
-					 					<div class="col-lg-9">
+					 					<div class="col-lg-8">
 											<input type="hidden" name="id" value="{{$user->id}}">
 											<span class="pf-title">Nueva contraseña</span>
 											<div class="pf-field">
@@ -76,9 +58,6 @@
 												<button class="examen-button ml-2" type="submit">Cambiar Contraseña</button>
 											</div>
 					 					</div>
-					 					<div class="col-lg-3">
-					 						<i class="la la-key big-icon"></i>
-					 					</div>
 					 				</div>
 					 			</form>
 					 		</div>
@@ -88,5 +67,5 @@
 			</div>
 		</div>
 	</div>
-</section>
+
 @endsection
